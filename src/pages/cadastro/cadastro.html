@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Cadastro
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page4" ng-controller="ExhibitionTabCtrl">
+  <form id="cadastro-form3">
+    <ion-item id="cadastro-textarea1">
+      <ion-label>
+        E-mail
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="user.email" name="um"></ion-input>
+    </ion-item>
+    <ion-item id="cadastro-input5">
+      <ion-label>
+        Nome
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="user.nome" name="dois"></ion-input>
+  
+    </ion-item>
+    <ion-item id="cadastro-input5">
+      <ion-label>
+        Senha
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="user.senha" name="tres"></ion-input>
+    </ion-item>
+  </form>
+ <!-- <button ion-button (click)="cadastrar()">Cadastrar</button> -->
+  
+  <button id="cadastro-button9" ion-button color="balanced"block on-click="goToProjetoTCCBrenda()">
+    Salvar
+  </button>
+  <button id="cadastro-button11" ion-button color="balanced" block on-click="goToProjetoTCCBrenda()">
+    Voltar
+  </button>
+  <ion-list>
+ <!--   <ion-item *ngFor="let user of listas | async">
+      <h2>{{user.nome}}</h2>
+      <h3>{{user.senha}}</h3>
+      <ion-note item-right *ngIf="user.teste == 'true'">
+        Vdd
+      </ion-note>
+    </ion-item> -->
+  </ion-list>
+</ion-content>
