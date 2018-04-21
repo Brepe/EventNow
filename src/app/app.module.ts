@@ -33,6 +33,7 @@ import { SugestoesPage } from '../pages/sugestoes/sugestoes';
 import { Device } from '@ionic-native/device';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import * as firebase from 'firebase';
+import { HomePage } from '../pages/home/home';
 
 
 
@@ -57,7 +58,8 @@ MapProxPage,
     CadastroPage,
     NovolocalPage,
     SugerirPage,
-SugestoesPage
+SugestoesPage,
+HomePage
   
   ],
   imports: [
@@ -78,7 +80,8 @@ SugestoesPage
     NovolocalPage,
  MapProxPage,
  SugerirPage, 
- SugestoesPage
+ SugestoesPage,
+ HomePage
   ],
   providers: [
     GoogleMaps,

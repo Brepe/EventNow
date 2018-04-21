@@ -16,6 +16,7 @@ import { NovolocalPage } from '../pages/novolocal/novolocal';
 import { SugerirPage } from '../pages/sugerir/sugerir';
 import { SugestoesPage } from '../pages/sugestoes/sugestoes';
 import * as firebase from 'Firebase';
+import { HomePage } from '../pages/home/home';
 
 
 
@@ -38,7 +39,8 @@ export class MyApp {
       { title: 'Listar eventos', component: listaProxPage },
       { title: 'Cadastrar local', component: NovolocalPage },
       { title: 'Sugerir', component: SugerirPage },
-      { title: 'Sugestões', component: SugestoesPage }
+      { title: 'Sugestões', component: SugestoesPage },
+      { title: 'Home', component: HomePage }
     ];
 
     
