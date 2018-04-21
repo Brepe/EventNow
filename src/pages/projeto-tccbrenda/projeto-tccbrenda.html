@@ -1,7 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Projeto TCC Brenda
+
+
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"> <!--para menu aparecer no cantinho-->
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>TCC Brenda
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -15,10 +23,14 @@
   </ion-list>
   <div id="projetoTCCBrenda-markdown3" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      Este projeto tem como objetivo explorar o uso do geolocalizador em conjunto framework ionic, para dispositivos móveis.
-      O app terá funcionalidades de encontrar situação de eventos, feiras, praias próximas do utilizador em tempo real, de
-       acordo com cadastro e contando com avaliação de outros usuários.
+      Este projeto tem como objetivo explorar o uso do geolocalizador em conjunto framework ionic, para dispositivos móveis. O
+      app terá funcionalidades de encontrar situação de eventos, feiras, praias próximas do utilizador em tempo real, de
+      acordo com cadastro e contando com avaliação de outros usuários.
+    
     </p>
+    <p>Também serve como ferramenta de auxilio para criadores de evento,
+       pois usuários podem sugerir eventos que gostariam de ter em sua região.</p>
+       <br>
   </div>
   <div id="projetoTCCBrenda-container2"></div>
   <form id="projetoTCCBrenda-form1">
@@ -27,7 +39,7 @@
         Insira seu nome
       </ion-label>
       <ion-input type="text" placeholder=""></ion-input>
-      
+
     </ion-item>
     <ion-item id="projetoTCCBrenda-input2">
       <ion-label>
@@ -36,7 +48,7 @@
       <ion-input type="text" placeholder=""></ion-input>
     </ion-item>
   </form>
-  <button id="projetoTCCBrenda-button1" ion-button color="balanced" block on-click="goToListaDeObjetos()">
+  <button id="projetoTCCBrenda-button1" ion-button color="balanced" block on-click="goToMapProx()">
     Entrar!
   </button>
   <button id="projetoTCCBrenda-button8" ion-button color="balanced" block on-click="goToCadastro()">

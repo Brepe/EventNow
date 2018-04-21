@@ -1,5 +1,14 @@
 <ion-header>
   <ion-navbar>
+
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu">
+          <!--para menu aparecer no cantinho-->
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>
       Cadastro
     </ion-title>
@@ -18,7 +27,7 @@
         Nome
       </ion-label>
       <ion-input type="text" [(ngModel)]="user.nome" name="dois"></ion-input>
-  
+
     </ion-item>
     <ion-item id="cadastro-input5">
       <ion-label>
@@ -26,22 +35,31 @@
       </ion-label>
       <ion-input type="text" [(ngModel)]="user.senha" name="tres"></ion-input>
     </ion-item>
+
+    <ion-item id="cadastro-input5">
+      <ion-label>
+        Repita Senha
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="user.senha1" name="tres1"></ion-input>
+    </ion-item>
   </form>
- <!-- <button ion-button (click)="cadastrar()">Cadastrar</button> -->
-  
-  <button id="cadastro-button9" ion-button color="balanced"block on-click="goToProjetoTCCBrenda()">
+  <!-- <button ion-button (click)="cadastrar()">Cadastrar</button> -->
+
+  <button id="cadastro-button9" ion-button color="balanced" block on-click="cadastrar()">
     Salvar
   </button>
   <button id="cadastro-button11" ion-button color="balanced" block on-click="goToProjetoTCCBrenda()">
     Voltar
   </button>
+
   <ion-list>
- <!--   <ion-item *ngFor="let user of listas | async">
+    <ion-item *ngFor="let user of usuario | async">
       <h2>{{user.nome}}</h2>
-      <h3>{{user.senha}}</h3>
-      <ion-note item-right *ngIf="user.teste == 'true'">
-        Vdd
-      </ion-note>
-    </ion-item> -->
+      <h3>{{user.email}}</h3>
+      <!--ion-note item-right *ngIf="user.teste == 'true'">
+         Vdd
+       </ion-note-->
+    </ion-item>
   </ion-list>
+
 </ion-content>

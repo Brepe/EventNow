@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-//import { DetalhesEMapaPage } from '../detalhes-emapa/detalhes-emapa';
-import { NovoPage } from '../novo/novo';
-import { ListaDeObjetosPage } from '../lista-de-objetos/lista-de-objetos';
+import { MapProxPage } from '../Map-prox/Map-prox';
+import { NovolocalPage } from '../novolocal/novolocal';
+import { listaProxPage } from '../lista-prox/lista-prox';
 import { CadastroPage } from '../cadastro/cadastro';
 
 
@@ -15,19 +15,25 @@ export class ProjetoTCCBrendaPage {
 
   constructor(public navCtrl: NavController) {
   }
-  goToDetalhesEMapa(params){
+
+  goToNovolocal(params){
     if (!params) params = {};
- //   this.navCtrl.push(DetalhesEMapaPage);
-  }goToNovo(params){
+    this.navCtrl.push(NovolocalPage);
+  }
+  goToMapProx(params){
     if (!params) params = {};
-    this.navCtrl.push(NovoPage);
-  }goToListaDeObjetos(params){
+   this.navCtrl.push(MapProxPage);
+  }
+  
+  goTolistaProx(params){
     if (!params) params = {};
-    this.navCtrl.push(ListaDeObjetosPage);
-  }goToCadastro(params){
+    this.navCtrl.push(listaProxPage);
+  }
+  goToCadastro(params){
     if (!params) params = {};
     this.navCtrl.push(CadastroPage);
-  }goToProjetoTCCBrenda(params){
+  }
+  goToProjetoTCCBrenda(params){
     if (!params) params = {};
     this.navCtrl.push(ProjetoTCCBrendaPage);
   }

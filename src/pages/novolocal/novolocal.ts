@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { DetalhesEmapaPage } from '../detalhes-emapa/detalhes-emapa';
+import { MapProxPage } from '../Map-prox/Map-prox';
 import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
-import { ListaDeObjetosPage } from '../lista-de-objetos/lista-de-objetos';
+import { listaProxPage } from '../lista-prox/lista-prox';
 import { CadastroPage } from '../cadastro/cadastro';
 
 
 @Component({
-  selector: 'page-novo',
-  templateUrl: 'novo.html'
+  selector: 'page-novolocal',
+  templateUrl: 'novolocal.html'
 })
 
-export class NovoPage {
+export class NovolocalPage {
 
   public event = {
     month: '10-05-2018',
@@ -21,20 +21,20 @@ export class NovoPage {
   }
   constructor(public navCtrl: NavController) {
   }
-  goToDetalhesEMapa(params){
+  goToMapProxPage(params){
     if (!params) params = {};
-this.navCtrl.push(DetalhesEmapaPage);
+this.navCtrl.push(MapProxPage);
   }goToProjetoTCCBrenda(params){
     if (!params) params = {};
     this.navCtrl.push(ProjetoTCCBrendaPage);
-  }goToListaDeObjetos(params){
+  }goTolistaProx(params){
     if (!params) params = {};
-    this.navCtrl.push(ListaDeObjetosPage);
+    this.navCtrl.push(listaProxPage);
   }goToCadastro(params){
     if (!params) params = {};
     this.navCtrl.push(CadastroPage);
-  }goToNovo(params){
+  }goToNovolocal(params){
     if (!params) params = {};
-    this.navCtrl.push(NovoPage);
+    this.navCtrl.push(NovolocalPage);
   }
 }

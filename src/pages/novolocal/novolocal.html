@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar>
+
+      <ion-buttons start>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"> <!--para menu aparecer no cantinho-->
+            </ion-icon>
+          </button>
+        </ion-buttons>
+
+    <ion-title>
+      Novo Evento
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page5">
+  <div id="novolocal-markdown7" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      Nesta área, a pessoa poderá cadastrar um novo local de evento e etc.
+    </p>
+  </div>
+  <form id="novolocal-form5">
+    <ion-item id="input1">
+      <ion-label></ion-label>
+      <ion-input type="text" placeholder="Nome do evento"></ion-input>
+    </ion-item>
+    <ion-item id="input2">
+      <ion-label></ion-label>
+      <ion-input type="text" placeholder="UF*"></ion-input>
+    </ion-item>
+    <ion-item id="input3">
+        <ion-label></ion-label>
+        <ion-input type="text" placeholder="Cidade*"></ion-input>
+      </ion-item>
+      <ion-item id="input4">
+          <ion-label></ion-label>
+          <ion-input type="text" placeholder="Rua*"></ion-input>
+        </ion-item>
+        <ion-item id="input5">
+            <ion-label></ion-label>
+            <ion-input type="text" placeholder="Número"></ion-input>
+          </ion-item>
+    <ion-item id="input6">
+      <ion-label></ion-label>
+      <ion-input type="text" placeholder="Nome do local"></ion-input>
+    </ion-item>
+
+    
+  </form>
+  <ion-item>
+    <ion-label>Tipo</ion-label>
+    <ion-select [(ngModel)]="toppings" multiple="true">
+      <ion-option>Evento cultural</ion-option>
+      <ion-option>Praia</ion-option>
+      <ion-option>Show</ion-option>
+      <ion-option>Festa</ion-option>
+      <ion-option>Feira</ion-option>
+      <ion-option>Outros</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Início</ion-label>
+      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Hora</ion-label>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Término</ion-label>
+      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.timeEnds"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Classificação</ion-label>
+        <ion-select [(ngModel)]="toppings1" multiple="true">
+          <ion-option>☆☆☆☆☆</ion-option>
+          <ion-option>☆☆</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+  </ion-list>
+  <button id="novolocal-button13" ion-button color="balanced" block on-click="goTolistaProx()">
+    Salvar
+  </button>
+  <button id="novolocal-button14" ion-button color="balanced" block on-click="goTolistaProx()">
+    Voltar
+  </button>
+</ion-content>
