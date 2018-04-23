@@ -16,6 +16,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 
+import { AgmCoreModule } from '@agm/core';
+
 //imports do firebase 6.0
 //import {FirebaseListObservable, 
  // FirebaseObjectObservable } from 'angularfire2/database-deprecated';
@@ -63,13 +65,16 @@ HomePage
   
   ],
   imports: [
-
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+      AgmCoreModule.forRoot({
+          apiKey: "AIzaSyDvXaxJqvlH_84DrxytYNF341Ax67H1OU8",
+          libraries: ["places"]
+      })
       ],
   bootstrap: [IonicApp],
   entryComponents: [
