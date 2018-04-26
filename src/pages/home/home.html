@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
+  <!--ion-item>
     <ion-label floating>Digite o endereço
       <br>e escolha uma sugestão:</ion-label>
     <ion-input id="txtHome" type="text"></ion-input>
@@ -22,9 +22,11 @@
     <br> Longitude: {{longitude}}
   </ion-item>
 
+  <button (click)="submitForm(endereco.value, latitude.value, longitude.value)">Save</button>
 
 
   <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
     <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
+  </agm-map-->
+
 </ion-content>

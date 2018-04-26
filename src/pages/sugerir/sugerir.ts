@@ -42,7 +42,7 @@ export class SugerirPage {
     timeStarts: '09:00',
     timeEnds: '10-05-2018'
   }
-  constructor(public db: AngularFireDatabase, public navCtrl: NavController) {
+  constructor( public db: AngularFireDatabase, public navCtrl: NavController) {
     this.sugestoes = this.db.list('/sugestoes');//para exibir e cadastrar
 
     this.sugerir = new Sugerir();//para cadastrar

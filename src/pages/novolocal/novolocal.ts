@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { MapProxPage } from '../Map-prox/Map-prox';
 import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
@@ -21,6 +21,9 @@ export class NovolocalPage {
   }
   constructor(public navCtrl: NavController) {
   }
+
+
+
   goToMapProxPage(params){
     if (!params) params = {};
 this.navCtrl.push(MapProxPage);

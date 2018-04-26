@@ -61,7 +61,8 @@ MapProxPage,
     NovolocalPage,
     SugerirPage,
 SugestoesPage,
-HomePage
+HomePage, 
+SugerirPage
   
   ],
   imports: [

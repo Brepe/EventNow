@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , Output, EventEmitter} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapProxPage } from '../Map-prox/Map-prox';
 import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
@@ -21,8 +21,6 @@ import {
 export class SugestoesPage {
   sugestoes:FirebaseListObservable<any[]>;//para exibir e cadastrar
 
-
-
   constructor(public db: AngularFireDatabase,
      public navCtrl: NavController) {
 
@@ -31,6 +29,8 @@ export class SugestoesPage {
 
 
   }
+  
+  
   goToMapProxPage(params) {
     if (!params) params = {};
     this.navCtrl.push(MapProxPage);
