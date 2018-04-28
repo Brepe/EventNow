@@ -23,6 +23,7 @@ export class ProjetoTCCBrendaPage {
   goToMapProx(params){
     if (!params) params = {};
    this.navCtrl.push(MapProxPage);
+   console.log(params);
   }
   
   goTolistaProx(params){

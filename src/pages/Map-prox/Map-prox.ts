@@ -1,8 +1,9 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef,NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation'; //plugin nativo cordova instalado via npm 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+import { DetalheseventoPage } from '../detalhesevento/detalhesevento';
 
 import * as firebase from 'Firebase';
 import { Device } from '@ionic-native/device';
@@ -15,6 +16,9 @@ import {
   CameraPosition,
   MarkerOptions
 } from '@ionic-native/google-maps';
+
+import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
+
 
 declare var google;
 
@@ -43,7 +47,8 @@ export class MapProxPage {
 
   constructor(public platform: Platform, private device: Device, public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
-    private googleMaps: GoogleMaps) {
+    private googleMaps: GoogleMaps, public zone: NgZone) {
+      (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
 
       platform.ready().then(() => {// chama a função principal
       this.displayGoogleMap();
@@ -52,20 +57,20 @@ export class MapProxPage {
 
       this.ref.on('value', resp => {
           snapshotToArray(resp).forEach(data => {//chama cada dado que foi passado de json para array
-
+let lat = parseFloat(data.lat);
+let lng = parseFloat(data.lng);
               let image = 'assets/img/point.png';
-              let updatelocation = new google.maps.LatLng(data.lat,data.lng);
+              let updatelocation = new google.maps.LatLng(lat,lng);
               this.addMarker(updatelocation,image); //adiciona latlng de cada um e a img de ponto
               this.setMapOnAll(this.map); //coloca para exibir tudo no mapa
           });
         });
 
-  }
+  } 
 
-  /*ionViewDidLoad() {
-    this.displayGoogleMap();
-    this.getMarkers();
-  }*/
+  GoDetail = () => { this.zone.run(() => { //Navigate To New Page 
+    this.navCtrl.push(DetalheseventoPage); }); } 
+
 
   displayGoogleMap() { 
 
@@ -80,6 +85,8 @@ export class MapProxPage {
 
   }
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+
+
 
   }).catch((error) => {
     console.log('Erro ao recuperar sua posição', error);
@@ -112,7 +119,22 @@ export class MapProxPage {
       icon: image
     });
     this.markers.push(marker);
+
+              // Parâmetros do texto que será exibido no clique;
+              var contentString = '<button onclick=\"window.angularComponent.GoDetail();\" >Exemplo</button>'+
+              '<h2>Exemplo</h2>' +
+              '<p>Exemplo</p>';
+            var infowindow = new google.maps.InfoWindow({
+              content: contentString,
+              maxWidth: 500
+            });
+            // Exibir texto ao clicar no ícone;
+            google.maps.event.addListener(marker, 'click', function () {
+              infowindow.open(this.map, marker);
+            });
+
   }
+
   /*/addMarkersToMap(markers) { //para carregar um marker no mapa
     var position = new google.maps.LatLng(markers.lat, markers.lng);
     var markersMarker = new google.maps.Marker({ position: position, title: markers.name });

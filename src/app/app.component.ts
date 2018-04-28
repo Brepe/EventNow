@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform,MenuController,Nav  } from 'ionic-angular';
+import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireDatabaseModule, AngularFireDatabase } from "angularfire2/database";
@@ -17,6 +17,7 @@ import { SugerirPage } from '../pages/sugerir/sugerir';
 import { SugestoesPage } from '../pages/sugestoes/sugestoes';
 import * as firebase from 'Firebase';
 import { HomePage } from '../pages/home/home';
+import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
 
 
 
@@ -24,26 +25,25 @@ import { HomePage } from '../pages/home/home';
   templateUrl: 'app.html'
 })
 export class MyApp {
-      @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: Nav;
 
-      rootPage: any = ProjetoTCCBrendaPage;
+  rootPage: any = ProjetoTCCBrendaPage;
 
-      pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, menu: MenuController) {
-     // used for an example of ngFor and navigation
-     this.pages = [
+    // used for an example of ngFor and navigation
+    this.pages = [
       { title: 'Home', component: ProjetoTCCBrendaPage },
       { title: 'Cadastro', component: CadastroPage },
+      { title: 'Cadastrar evento', component: HomePage },
       { title: 'Mapear eventos', component: MapProxPage },
       { title: 'Listar eventos', component: listaProxPage },
-      { title: 'Cadastrar local', component: NovolocalPage },
       { title: 'Sugerir', component: SugerirPage },
-      { title: 'Sugestões', component: SugestoesPage },
-      { title: 'Home', component: HomePage }
+      { title: 'Sugestões', component: SugestoesPage }
     ];
 
-    
+
     platform.ready().then(() => {
       menu.enable(true);
       // Okay, so the platform is ready and our plugins are available.
@@ -52,11 +52,11 @@ export class MyApp {
       splashScreen.hide();
     });
   }
-  
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-  
+
 }

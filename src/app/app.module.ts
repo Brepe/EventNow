@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler,Component } from '@angular/core';
+import { NgModule, ErrorHandler, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -7,7 +7,7 @@ import { listaProxPage } from '../pages/lista-prox/lista-prox';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { NovolocalPage } from '../pages/novolocal/novolocal';
 import { MapProxPage } from '../pages/Map-prox/Map-prox';
-import {SugerirPage} from '../pages/sugerir/sugerir';
+import { SugerirPage } from '../pages/sugerir/sugerir';
 
 import { Geolocation } from '@ionic-native/geolocation'; //plugin nativo cordova instalado via npm 
 
@@ -18,17 +18,22 @@ import { HttpModule } from '@angular/http';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { myService } from '../pages/services/data.service';
+
+
 //imports do firebase 6.0
 //import {FirebaseListObservable, 
- // FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+// FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 //imports do firebase 4.0
-import { AngularFireDatabaseModule, 
- /* AngularFireDatabase*/ } from "angularfire2/database";
-  import {
-    AngularFireDatabase,
-    FirebaseObjectObservable,
-    FirebaseListObservable
-  } from 'angularfire2/database-deprecated';
+import {
+  AngularFireDatabaseModule,
+  /* AngularFireDatabase*/
+} from "angularfire2/database";
+import {
+  AngularFireDatabase,
+  FirebaseObjectObservable,
+  FirebaseListObservable
+} from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { SugestoesPage } from '../pages/sugestoes/sugestoes';
@@ -36,6 +41,8 @@ import { Device } from '@ionic-native/device';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import * as firebase from 'firebase';
 import { HomePage } from '../pages/home/home';
+import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
+
 
 
 
@@ -56,14 +63,14 @@ firebase.initializeApp(config);
     MyApp,
     ProjetoTCCBrendaPage,
     listaProxPage,
-MapProxPage,
+    MapProxPage,
     CadastroPage,
     NovolocalPage,
+    SugestoesPage,
+    HomePage,
     SugerirPage,
-SugestoesPage,
-HomePage, 
-SugerirPage
-  
+    DetalheseventoPage
+
   ],
   imports: [
     BrowserModule,
@@ -72,11 +79,11 @@ SugerirPage
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-      AgmCoreModule.forRoot({
-          apiKey: "AIzaSyDvXaxJqvlH_84DrxytYNF341Ax67H1OU8",
-          libraries: ["places"]
-      })
-      ],
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyDvXaxJqvlH_84DrxytYNF341Ax67H1OU8",
+      libraries: ["places"]
+    })
+  ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -84,26 +91,27 @@ SugerirPage
     listaProxPage,
     CadastroPage,
     NovolocalPage,
- MapProxPage,
- SugerirPage, 
- SugestoesPage,
- HomePage
+    MapProxPage,
+    SugerirPage,
+    SugestoesPage,
+    HomePage,
+    DetalheseventoPage
   ],
   providers: [
     GoogleMaps,
     AngularFireDatabase,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Geolocation, //provider p geoloc nativo
-    
+    myService,
     Device
-  ] 
+  ]
 })
 export class AppModule {
 
 
 
-  
+
 
 }
