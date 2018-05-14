@@ -5,13 +5,13 @@ export class myService {
   public adressdata: string;
   public latdata: number;
   public londata: number;
-
+  public idkey: string;
 
   constructor() {
     this.adressdata = "Adress";
     this.latdata = -9000000;
     this.londata = -9000000;
-
+    this.idkey ="tst";
 
   }
 
@@ -31,5 +31,11 @@ export class myService {
   getDatalon() {
     return this.londata;
 
+    
+  }
+
+  setIdkey(myidkey){
+    this.idkey = myidkey;
+    console.log(this.idkey);
   }
 }

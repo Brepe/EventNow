@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef,NgZone } from '@angular/core';
+import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation'; //plugin nativo cordova instalado via npm 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -18,6 +18,7 @@ import {
 } from '@ionic-native/google-maps';
 
 import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
+import { myService } from '../services/data.service';
 
 
 declare var google;
@@ -35,6 +36,7 @@ export class MapProxPage {
   map: GoogleMap;
   position: any = {};
 
+
   // position: any;
   //Criar um viewchild para o elemento da div poder ser visto aqui e não dar o erro de falta de first child. Ref 
   @ViewChild('map') mapContainer: ElementRef;
@@ -45,52 +47,59 @@ export class MapProxPage {
 
 
 
-  constructor(public platform: Platform, private device: Device, public db: AngularFireDatabase,
+  constructor (private _myService: myService, public platform: Platform, private device: Device, public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
     private googleMaps: GoogleMaps, public zone: NgZone) {
-      (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
+    (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
 
-      platform.ready().then(() => {// chama a função principal
+    platform.ready().then(() => {// chama a função principal
       this.displayGoogleMap();
       //this.getMarkers();    
+
     });
 
-      this.ref.on('value', resp => {
-          snapshotToArray(resp).forEach(data => {//chama cada dado que foi passado de json para array
-let lat = parseFloat(data.lat);
-let lng = parseFloat(data.lng);
-              let image = 'assets/img/point.png';
-              let updatelocation = new google.maps.LatLng(lat,lng);
-              this.addMarker(updatelocation,image); //adiciona latlng de cada um e a img de ponto
-              this.setMapOnAll(this.map); //coloca para exibir tudo no mapa
-          });
-        });
-
-  } 
-
-  GoDetail = () => { this.zone.run(() => { //Navigate To New Page 
-    this.navCtrl.push(DetalheseventoPage); }); } 
-
-
-  displayGoogleMap() { 
-
- this.geolocation.getCurrentPosition()//aqui pra pegar loc atual
- .then((resp) => {
-   let mypos = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-
-   let mapOptions = {//opções da visualização do mapa
-    zoom: 18,
-    center: mypos,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    this.ref.on('value', resp => {
+      snapshotToArray(resp).forEach(data => {//chama cada dado que foi passado de json para array
+        let lat = parseFloat(data.lat);
+        let lng = parseFloat(data.lng);
+        let ender = data.endereco;
+        let tudo = data.key;
+        let image = 'assets/img/point.png';
+        let updatelocation = new google.maps.LatLng(lat, lng);
+        this.addMarker(updatelocation, image, ender, tudo); //adiciona latlng de cada um e a img de ponto
+        this.setMapOnAll(this.map); //coloca para exibir tudo no mapa
+      });
+    });
 
   }
-    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+
+  GoDetail = (idk: any) => {
+    this.zone.run(() => { //Navigate To New Page 
+      this.navCtrl.push(DetalheseventoPage,{idk});
+      
+    });
+  }
+
+
+  displayGoogleMap() {
+
+    this.geolocation.getCurrentPosition()//aqui pra pegar loc atual
+      .then((resp) => {
+        let mypos = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+
+        let mapOptions = {//opções da visualização do mapa
+          zoom: 18,
+          center: mypos,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+
+        }
+        this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
 
 
 
-  }).catch((error) => {
-    console.log('Erro ao recuperar sua posição', error);
-  });
+      }).catch((error) => {
+        console.log('Erro ao recuperar sua posição', error);
+      });
 
   }
 
@@ -99,7 +108,6 @@ let lng = parseFloat(data.lng);
     for (var i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(map);
     }
-    console.log(this.markers);
   }
   /*getMarkers() { // array com os markers
     for (let _i = 0; _i < this.markers.length; _i++) {
@@ -111,27 +119,32 @@ let lng = parseFloat(data.lng);
   }*/
 
 
-
-  addMarker(location, image) {
+  addMarker(location, image, ender, tudo) {
     let marker = new google.maps.Marker({
       position: location,
       map: this.map,
       icon: image
     });
-    this.markers.push(marker);
 
-              // Parâmetros do texto que será exibido no clique;
-              var contentString = '<button onclick=\"window.angularComponent.GoDetail();\" >Exemplo</button>'+
-              '<h2>Exemplo</h2>' +
-              '<p>Exemplo</p>';
-            var infowindow = new google.maps.InfoWindow({
-              content: contentString,
-              maxWidth: 500
-            });
-            // Exibir texto ao clicar no ícone;
-            google.maps.event.addListener(marker, 'click', function () {
-              infowindow.open(this.map, marker);
-            });
+    this.markers.push(marker);
+    var endere = ender;
+    // Parâmetros do texto que será exibido no clique; 
+    var contentString = "<button onclick=\"window.angularComponent.GoDetail('" + tudo + "')\" >Exemplo</button>"+
+      '<h2>Exemplo</h2><br>' + endere +'<br>'+ tudo
+    '<p>Exemplo</p>';
+
+
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: 100,
+      maxHeight: 100
+
+    });
+    // Exibir texto ao clicar no ícone;
+    google.maps.event.addListener(marker, 'click', function () {
+      infowindow.open(this.map, marker);
+    });
 
   }
 
@@ -151,9 +164,9 @@ export const snapshotToArray = snapshot => {//func para converter de json do bd 
   let returnArr = [];
 
   snapshot.forEach(childSnapshot => {
-      let item = childSnapshot.val();
-      item.key = childSnapshot.key;
-      returnArr.push(item);
+    let item = childSnapshot.val();
+    item.key = childSnapshot.key;
+    returnArr.push(item);
   });
 
   return returnArr;
