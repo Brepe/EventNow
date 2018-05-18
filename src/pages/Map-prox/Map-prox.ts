@@ -64,9 +64,11 @@ export class MapProxPage {
         let lng = parseFloat(data.lng);
         let ender = data.endereco;
         let tudo = data.key;
+        let evento = data.event;
+
         let image = 'assets/img/point.png';
         let updatelocation = new google.maps.LatLng(lat, lng);
-        this.addMarker(updatelocation, image, ender, tudo); //adiciona latlng de cada um e a img de ponto
+        this.addMarker(updatelocation, image, ender, tudo, evento); //adiciona latlng de cada um e a img de ponto
         this.setMapOnAll(this.map); //coloca para exibir tudo no mapa
       });
     });
@@ -119,7 +121,7 @@ export class MapProxPage {
   }*/
 
 
-  addMarker(location, image, ender, tudo) {
+  addMarker(location, image, ender, tudo, evento) {
     let marker = new google.maps.Marker({
       position: location,
       map: this.map,
@@ -129,9 +131,8 @@ export class MapProxPage {
     this.markers.push(marker);
     var endere = ender;
     // Parâmetros do texto que será exibido no clique; 
-    var contentString = "<button onclick=\"window.angularComponent.GoDetail('" + tudo + "')\" >Exemplo</button>"+
-      '<h2>Exemplo</h2><br>' + endere +'<br>'+ tudo
-    '<p>Exemplo</p>';
+    var contentString = '<h3>'+ evento+'</h3><br>' + endere + 
+    "<br><button onclick=\"window.angularComponent.GoDetail('" + tudo + "')\" >Detalhes</button>";
 
 
 

@@ -12,34 +12,52 @@ import * as firebase from 'Firebase';
 
 @IonicPage()
 @Component({
-  selector: 'page-detalhesevento', 
+  selector: 'page-detalhesevento',
   templateUrl: 'detalhesevento.html',
 })
 export class DetalheseventoPage {
-  roomkey:string;
-  chats = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {  
+  roomkey: string;
+  endereco: string = "a";
+  lat: string = "a";
+  lng: string = "a";
+  month: string = "a";
+  timeEnds: string = "a";
+  timeStarts: string = "a";
+  toppings: string = "a";
+  uf: string = "a";
+  event: string = "a";
+  description: string = "a";
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
     this.roomkey = this.navParams.get("idk") as string;
 
-     firebase.database().ref('eventos/'+this.roomkey).on('value', resp => {
-      this.chats = [];
-      this.chats = snapshotToArray(resp);
+    firebase.database().ref('eventos/' + this.roomkey).on('value', snapshot => {
 
+      this.event = snapshot.val().event;
+      this.description = snapshot.val().description;
+      this.endereco = snapshot.val().endereco;
+      this.lat = snapshot.val().lat;
+      this.lng = snapshot.val().lng;
+      this.month = snapshot.val().month;
+      this.timeEnds = snapshot.val().timeEnds;
+      this.timeStarts = snapshot.val().timeStarts;
+      this.toppings = snapshot.val().toppings;
+      this.uf = snapshot.val().uf;
     });
   }
 
   ionViewDidLoad() {
-    console.log(this.chats);
+
   }
 
 }
 export const snapshotToArray = snapshot => {
   let returnArr = [];
 
-  snapshot.forEach(childSnapshot => {
-      let item = childSnapshot.val();
-      item.key = childSnapshot.key;
-      returnArr.push(item);
+  snapshot.forEach(Snapshot => {
+    let item = Snapshot.val();
+    item.key = Snapshot.key;
+    returnArr.push(item);
   });
 
   return returnArr;

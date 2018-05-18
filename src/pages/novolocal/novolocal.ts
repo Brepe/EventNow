@@ -31,6 +31,8 @@ export class Listar {//para cadastrar
   timeStart: string;
   timeEnds: string;
   month: string;
+  description: string;
+  event:string;
 
 }
 

@@ -22,13 +22,21 @@
   </div>
   <ion-list>
   <div style="float:left; clear:both;">
+      <ion-item id="input8">
+          <ion-label>Nome do evento</ion-label>
+          <ion-input type="text" [(ngModel)]="lista.event" name="event" placeholder=""></ion-input>
+        </ion-item>
+        <ion-item id="input9">
+            <ion-label>Descrição</ion-label>
+            <ion-input type="text" [(ngModel)]="lista.description" name="description" placeholder=""></ion-input>
+          </ion-item>
     <ion-item id="input2">
         <ion-label>Endereço</ion-label>
         <ion-input type="text" [(ngModel)]="lista.endereco" name="endereco" value="{{_myService.getData()}}"></ion-input>
       </ion-item>
     <ion-item id="input5">
         <ion-label>UF</ion-label>
-        <ion-input type="text" [(ngModel)]="lista.uf" name="uf" placeholder="UF*"></ion-input>
+        <ion-input type="text" [(ngModel)]="lista.uf" name="uf" ></ion-input>
       </ion-item>
   </div>
   <ion-item>
