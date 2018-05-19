@@ -18,11 +18,14 @@ import { Http } from '@angular/http';
 import { MapProxPage } from '../Map-prox/Map-prox';
 import { SugerirPage } from '../sugerir/sugerir';
 import { SugestoesPage } from '../sugestoes/sugestoes';
+import { User } from '../../app/providers/user';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  //<<<<por causa do erro do ngmodule nos cadastros
+import { CommonModule } from '@angular/common'; //<<<<por causa do erro do ngmodule nos cadastros
 
-export class User{//para cadastrar
+export class User1{//para cadastrar
   id: string;
-  nome: string;
-  senha: string;
+  login: string;
+  password: string;
   email: string
 }
 @Injectable()
@@ -31,25 +34,38 @@ export class User{//para cadastrar
   templateUrl: 'cadastro.html'
 })
 export class CadastroPage {
+  use = {} as User;
 
-  user: User; //para cadastrar
+  user: User1; //para cadastrar
   usuario:FirebaseListObservable<any[]>;//para exibir e cadastrar
   
   //public feeds: Array<string>;
   //private url: string = "https://www.reddit.com/new.json"; 
   constructor(private toastCtrl: ToastController, 
+    public afauth: AngularFireAuth,
     public db: AngularFireDatabase, 
     public af: AngularFireModule,public navCtrl: NavController, 
     public navParams: NavParams,  public http: Http) {
    this.usuario = this.db.list('/usuario');//para exibir e cadastrar
-   this.user = new User();//para cadastrar
+   this.use = new User1();//para cadastrar
 }
+ngOnInit() {
+  this.use = {} as User;
+}
+async cadastrar(use: User){//para cadastrar
 
-cadastrar(){//para cadastrar
-  this.usuario.push(this.user).then(() => {
-    this.user = new User();
+  try{
+  const result = await this.afauth.auth.createUserAndRetrieveDataWithEmailAndPassword(use.email, use.password);
+  console.log(result);
+
+  this.usuario.push(this.use).then(() => {
+    this.use = new User1();
+
   });
   this.presentToast();
+  }catch(e){
+  console.log(e);
+  }
 }
 
 presentToast() {

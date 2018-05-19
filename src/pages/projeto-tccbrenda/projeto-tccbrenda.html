@@ -17,7 +17,6 @@
   <div id="projetoTCCBrenda-markdown1" class="show-list-numbers-and-dots"></div>
   <ion-list id="projetoTCCBrenda-list2">
     <ion-item color="balanced" id="projetoTCCBrenda-list-item1">
-      <ion-icon name="locate" item-left></ion-icon>
       Bem-vindo aos Eventos!
     </ion-item>
   </ion-list>
@@ -34,21 +33,21 @@
   </div>
   <div id="projetoTCCBrenda-container2"></div>
   <form id="projetoTCCBrenda-form1">
-    <ion-item id="projetoTCCBrenda-input2">
-      <ion-label>
-        Insira seu nome
-      </ion-label>
-      <ion-input type="text" placeholder=""></ion-input>
-
-    </ion-item>
-    <ion-item id="projetoTCCBrenda-input2">
-      <ion-label>
-        Insira uma senha
-      </ion-label>
-      <ion-input type="text" placeholder=""></ion-input>
-    </ion-item>
-  </form>
-  <button id="projetoTCCBrenda-button1" ion-button color="balanced" block on-click="goToMapProx()">
+      <ion-item id="projetoTCCBrenda-input2">
+        <ion-label>
+          Insira seu e-mail
+        </ion-label>
+        <ion-input type="text" name= "email" [(ngModel)]="use.email" placeholder=""></ion-input>
+  
+      </ion-item>
+      <ion-item id="projetoTCCBrenda-input3">
+        <ion-label>
+          Insira uma senha
+        </ion-label>
+        <ion-input type="text"name= "pass" [(ngModel)]="use.password" placeholder=""></ion-input>
+      </ion-item>
+    </form>
+  <button id="projetoTCCBrenda-button1" ion-button color="balanced" block on-click="login(use)">
     Entrar!
   </button>
   <button id="projetoTCCBrenda-button8" ion-button color="balanced" block on-click="goToCadastro()">

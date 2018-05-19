@@ -19,6 +19,7 @@ import {
 
 import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
 import { myService } from '../services/data.service';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 
 declare var google;
@@ -49,7 +50,7 @@ export class MapProxPage {
 
   constructor (private _myService: myService, public platform: Platform, private device: Device, public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
-    private googleMaps: GoogleMaps, public zone: NgZone) {
+    private googleMaps: GoogleMaps, public zone: NgZone, public afauth: AngularFireAuth) {
     (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
 
     platform.ready().then(() => {// chama a função principal
@@ -73,6 +74,9 @@ export class MapProxPage {
       });
     });
 
+  }
+  ionViewWillLoad(){
+    this.afauth.authState.subscribe(data => console.log(data));
   }
 
   GoDetail = (idk: any) => {

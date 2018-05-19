@@ -34,7 +34,9 @@ export class DetalheseventoPage {
     firebase.database().ref('eventos/' + this.roomkey).on('value', snapshot => {
 
       this.event = snapshot.val().event;
+      console.log(this.event);
       this.description = snapshot.val().description;
+      console.log(this.description);
       this.endereco = snapshot.val().endereco;
       this.lat = snapshot.val().lat;
       this.lng = snapshot.val().lng;

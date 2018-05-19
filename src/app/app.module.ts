@@ -19,6 +19,9 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 
 import { myService } from '../pages/services/data.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  //<<<<por causa do erro do ngmodule nos cadastros
+import { CommonModule } from '@angular/common'; //<<<<por causa do erro do ngmodule nos cadastros
+
 
 
 //imports do firebase 6.0
@@ -74,6 +77,9 @@ firebase.initializeApp(config);
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
     AngularFireModule.initializeApp(config),

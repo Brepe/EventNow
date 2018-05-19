@@ -15,37 +15,30 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page4" ng-controller="ExhibitionTabCtrl">
-  <form id="cadastro-form3">
-    <ion-item id="cadastro-textarea1">
-      <ion-label>
-        E-mail
-      </ion-label>
-      <ion-input type="text" [(ngModel)]="user.email" name="um"></ion-input>
-    </ion-item>
-    <ion-item id="cadastro-input5">
-      <ion-label>
-        Nome
-      </ion-label>
-      <ion-input type="text" [(ngModel)]="user.nome" name="dois"></ion-input>
-
-    </ion-item>
-    <ion-item id="cadastro-input5">
-      <ion-label>
-        Senha
-      </ion-label>
-      <ion-input type="text" [(ngModel)]="user.senha" name="tres"></ion-input>
-    </ion-item>
-
-    <ion-item id="cadastro-input5">
-      <ion-label>
-        Repita Senha
-      </ion-label>
-      <ion-input type="text" [(ngModel)]="user.senha1" name="tres1"></ion-input>
-    </ion-item>
-  </form>
+    <form id="projetoTCCBrenda-form1">
+        <ion-item id="projetoTCCBrenda-input2">
+          <ion-label>
+            Insira seu e-mail
+          </ion-label>
+          <ion-input type="text" name= "email" [(ngModel)]="use.email" placeholder=""></ion-input>
+    
+        </ion-item>
+        <ion-item id="projetoTCCBrenda-input3">
+          <ion-label>
+            Insira uma senha
+          </ion-label>
+          <ion-input type="text"name= "pass" [(ngModel)]="use.password" placeholder=""></ion-input>
+        </ion-item>
+        <ion-item id="projetoTCCBrenda-input4">
+            <ion-label>
+              Insira seu nome
+            </ion-label>
+            <ion-input type="text"name= "nome" [(ngModel)]="use.nome" placeholder=""></ion-input>
+          </ion-item>
+      </form>
   <!-- <button ion-button (click)="cadastrar()">Cadastrar</button> -->
 
-  <button id="cadastro-button9" ion-button color="balanced" block on-click="cadastrar()">
+  <button id="cadastro-button9" ion-button color="balanced" block on-click="cadastrar(use)">
     Salvar
   </button>
   <button id="cadastro-button11" ion-button color="balanced" block on-click="goToProjetoTCCBrenda()">
