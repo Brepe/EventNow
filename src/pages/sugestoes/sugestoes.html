@@ -21,7 +21,7 @@
 
 
 <ion-content padding id="page2">
-
+<div *ngIf="use | async; else elseBlock">
   <ion-list>
     <ion-item *ngFor="let user of sugestoes | async">
       <h2>{{user.tipo}}</h2>
@@ -38,8 +38,6 @@
        </ion-note-->
     </ion-item>
   </ion-list>
-
-  <button id="ListaProx-button7" ion-button color="balanced" block on-click="goToProjetoTCCBrenda()">
-    Voltar
-  </button>
+</div>
+<ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
 </ion-content>

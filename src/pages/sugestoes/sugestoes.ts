@@ -1,16 +1,18 @@
 import { Component , Output, EventEmitter} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapProxPage } from '../Map-prox/Map-prox';
-import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
+import { HomePage } from '../home/home';
 import { listaProxPage } from '../lista-prox/lista-prox';
 import { CadastroPage } from '../cadastro/cadastro';
-import { NovolocalPage } from '../novolocal/novolocal';
+import { Novoevento2Page } from '../novoevento2/novoevento2';
 import {AngularFireList  } from 'angularfire2/database';
 import {
   AngularFireDatabase,
   FirebaseObjectObservable,
   FirebaseListObservable
 } from 'angularfire2/database-deprecated';
+import { Observable } from 'rxjs/Observable'; //para o auth firebase ngif
+import * as firebase from 'Firebase';
 
 
 @IonicPage()
@@ -20,6 +22,7 @@ import {
 })
 export class SugestoesPage {
   sugestoes:FirebaseListObservable<any[]>;//para exibir e cadastrar
+  use: Observable<firebase.User>; //para o auth firebase ngif
 
   constructor(public db: AngularFireDatabase,
      public navCtrl: NavController) {
@@ -34,17 +37,17 @@ export class SugestoesPage {
   goToMapProxPage(params) {
     if (!params) params = {};
     this.navCtrl.push(MapProxPage);
-  } goToProjetoTCCBrenda(params) {
+  } goToHome(params) {
     if (!params) params = {};
-    this.navCtrl.push(ProjetoTCCBrendaPage);
+    this.navCtrl.push(HomePage);
   } goTolistaProx(params) {
     if (!params) params = {};
     this.navCtrl.push(listaProxPage);
   } goToCadastro(params) {
     if (!params) params = {};
     this.navCtrl.push(CadastroPage);
-  } goToNovolocal(params) {
+  } goToNovoevento2(params) {
     if (!params) params = {};
-    this.navCtrl.push(NovolocalPage);
+    this.navCtrl.push(Novoevento2Page);
   }
 }

@@ -17,9 +17,9 @@ import {
   MarkerOptions
 } from '@ionic-native/google-maps';
 
-import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
+import { HomePage } from '../home/home';
 import { myService } from '../services/data.service';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { Profile } from '../../app/providers/profile';
 
 
 declare var google;
@@ -30,14 +30,15 @@ declare var google;
   templateUrl: 'Map-prox.html',
 })
 export class MapProxPage {
-  eventos: FirebaseListObservable<any[]>;//para exibir e cadastrar
+
+
+  eventos: FirebaseListObservable<any[]>; //para exibir e cadastrar
 
   markers = [];
 
   map: GoogleMap;
   position: any = {};
-
-
+profile ={} as Profile;
   // position: any;
   //Criar um viewchild para o elemento da div poder ser visto aqui e não dar o erro de falta de first child. Ref 
   @ViewChild('map') mapContainer: ElementRef;
@@ -50,9 +51,8 @@ export class MapProxPage {
 
   constructor (private _myService: myService, public platform: Platform, private device: Device, public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
-    private googleMaps: GoogleMaps, public zone: NgZone, public afauth: AngularFireAuth) {
+    private googleMaps: GoogleMaps, public zone: NgZone) {
     (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
-
     platform.ready().then(() => {// chama a função principal
       this.displayGoogleMap();
       //this.getMarkers();    
@@ -75,9 +75,7 @@ export class MapProxPage {
     });
 
   }
-  ionViewWillLoad(){
-    this.afauth.authState.subscribe(data => console.log(data));
-  }
+
 
   GoDetail = (idk: any) => {
     this.zone.run(() => { //Navigate To New Page 

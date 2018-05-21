@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-buttons start>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"> <!--para menu aparecer no cantinho-->
+          </ion-icon>
+        </button>
+      </ion-buttons>
+  <ion-navbar color="app">
+    <ion-title>
+      Novo evento
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating>Digite o endereço
+      <br>e escolha uma sugestão:</ion-label>
+    <ion-input id="myadress" #myadress type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    Endereço:
+    <br> {{endereco}}
+  </ion-item>
+  <ion-item>
+    Latitude: {{latitude}}
+    <br> Latitude: <ion-input id="mylat" #mylat type="text" [(ngModel)]="latitude"></ion-input>
+  </ion-item>
+  <ion-item>
+    Longitude: {{longitude}}
+    <br> Longitude: <ion-input id="mylon" #mylon type="text" [(ngModel)]="longitude"></ion-input>
+  </ion-item>
+
+  <!--button (click)="submitForm(endereco.value, latitude.value, longitude.value)">Save</button>
+
+
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map-->
+<br>
+  <button ion-button  (click)="this._myService.setData(endereco,mylat.value,mylon.value);goToNovoevento2(); adressdata = endereco; latdata=mylat.value; londata=mylon.value;">Continuar</button>
+  <br>Object data: {{adressdata}}<br>{{latdata}}{{londata}}
+
+</ion-content>

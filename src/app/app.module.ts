@@ -2,10 +2,10 @@ import { NgModule, ErrorHandler, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { ProjetoTCCBrendaPage } from '../pages/projeto-tccbrenda/projeto-tccbrenda';
+import { HomePage } from '../pages/home/home';
 import { listaProxPage } from '../pages/lista-prox/lista-prox';
 import { CadastroPage } from '../pages/cadastro/cadastro';
-import { NovolocalPage } from '../pages/novolocal/novolocal';
+import { Novoevento2Page } from '../pages/novoevento2/novoevento2';
 import { MapProxPage } from '../pages/Map-prox/Map-prox';
 import { SugerirPage } from '../pages/sugerir/sugerir';
 
@@ -43,7 +43,7 @@ import { SugestoesPage } from '../pages/sugestoes/sugestoes';
 import { Device } from '@ionic-native/device';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import * as firebase from 'firebase';
-import { HomePage } from '../pages/home/home';
+import { NovoeventoPage } from '../pages/novoevento/novoevento';
 import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
 
 
@@ -64,13 +64,13 @@ firebase.initializeApp(config);
 @NgModule({
   declarations: [
     MyApp,
-    ProjetoTCCBrendaPage,
+    HomePage,
     listaProxPage,
     MapProxPage,
     CadastroPage,
-    NovolocalPage,
+    Novoevento2Page,
     SugestoesPage,
-    HomePage,
+    NovoeventoPage,
     SugerirPage,
     DetalheseventoPage
 
@@ -93,14 +93,14 @@ firebase.initializeApp(config);
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ProjetoTCCBrendaPage,
+    HomePage,
     listaProxPage,
     CadastroPage,
-    NovolocalPage,
+    Novoevento2Page,
     MapProxPage,
     SugerirPage,
     SugestoesPage,
-    HomePage,
+    NovoeventoPage,
     DetalheseventoPage
   ],
   providers: [

@@ -8,15 +8,15 @@ import { FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
-import { ProjetoTCCBrendaPage } from '../pages/projeto-tccbrenda/projeto-tccbrenda';
+import { HomePage } from '../pages/home/home';
 import { MapProxPage } from '../pages/Map-prox/Map-prox';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { listaProxPage } from '../pages/lista-prox/lista-prox';
-import { NovolocalPage } from '../pages/novolocal/novolocal';
+import { Novoevento2Page } from '../pages/novoevento2/novoevento2';
 import { SugerirPage } from '../pages/sugerir/sugerir';
 import { SugestoesPage } from '../pages/sugestoes/sugestoes';
 import * as firebase from 'Firebase';
-import { HomePage } from '../pages/home/home';
+import { NovoeventoPage } from '../pages/novoevento/novoevento';
 import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
 
 
@@ -27,16 +27,16 @@ import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProjetoTCCBrendaPage;
+  rootPage: any = HomePage;
 
   pages: Array<{ title: string, component: any }>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, menu: MenuController) {
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: ProjetoTCCBrendaPage },
+      { title: 'Home', component: HomePage },
       { title: 'Cadastro', component: CadastroPage },
-      { title: 'Cadastrar evento', component: HomePage },
+      { title: 'Novo evento', component: NovoeventoPage },
       { title: 'Mapear eventos', component: MapProxPage },
       { title: 'Listar eventos', component: listaProxPage },
       { title: 'Sugerir', component: SugerirPage },

@@ -1,21 +1,25 @@
 <ion-header>
-    <ion-navbar>
-  
-        <ion-buttons start>
-            <button ion-button icon-only menuToggle>
-              <ion-icon name="menu"> <!--para menu aparecer no cantinho-->
-              </ion-icon>
-            </button>
-          </ion-buttons>
-  
-      <ion-title>
-        sugerir
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
-  <ion-content padding id="page5">
+  <ion-navbar>
+
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu">
+          <!--para menu aparecer no cantinho-->
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      sugerir
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page5">
+  <div *ngIf="use | async; else elseBlock">
     <div id="sugest-markdown7" class="show-list-numbers-and-dots">
+      <h1>Welcome {{ (use | async)?.email }}!</h1>
       <p style="color:#000000;">
+
         Nesta área, a pessoa poderá sugerir um evento para organizadores e etc. Essa sugestão aparecerá na lista de sugestões.
       </p>
     </div>
@@ -25,15 +29,15 @@
         <ion-input type="text" [(ngModel)]="sugerirform.uf" name="uf" placeholder="UF*"></ion-input>
       </ion-item>
       <ion-item id="input3">
-          <ion-label></ion-label>
-          <ion-input type="text"[(ngModel)]="sugerirform.cidade" name="cidade" placeholder="Cidade*"></ion-input>
-        </ion-item>
-  
-      
+        <ion-label></ion-label>
+        <ion-input type="text" [(ngModel)]="sugerirform.cidade" name="cidade" placeholder="Cidade*"></ion-input>
+      </ion-item>
+
+
     </form>
     <ion-item>
       <ion-label>Tipo</ion-label>
-      <ion-select [(ngModel)]="sugerirform.tipo" name="tipo"  multiple="true">
+      <ion-select [(ngModel)]="sugerirform.tipo" name="tipo" multiple="true">
         <ion-option>Evento cultural</ion-option>
         <ion-option>Praia</ion-option>
         <ion-option>Show</ion-option>
@@ -42,48 +46,48 @@
         <ion-option>Outros</ion-option>
       </ion-select>
     </ion-item>
-  
-    <ion-item>
-        <ion-label>Melhor dia da semana</ion-label>
-        <ion-select [(ngModel)]="sugerirform.melhordia" name="melhordia" multiple="true">
-          <ion-option>Seg. a sex.</ion-option>
-          <ion-option>Sab</ion-option>
-          <ion-option>Dom</ion-option>
-        </ion-select>
-      </ion-item>
 
     <ion-item>
-        <ion-label>Melhor hora do dia</ion-label>
-        <ion-select [(ngModel)]="sugerirform.melhorhora" name="melhorhora" multiple="true">
-          <ion-option>Manhã</ion-option>
-          <ion-option>Tarde</ion-option>
-          <ion-option>Noite</ion-option>
-          <ion-option>Madrugada</ion-option>
-        </ion-select>
-      </ion-item>
-  
-      <ion-item>
-          <ion-label>Tipo de público</ion-label>
-          <ion-select [(ngModel)]="sugerirform.pub" name="pub" multiple="true">
-            <ion-option>Infantil</ion-option>
-            <ion-option>Estudante</ion-option>
-            <ion-option>Adulto</ion-option>
-            <ion-option>Adolescente</ion-option>
-            <ion-option>Qualquer</ion-option>
-          </ion-select>
-        </ion-item>
+      <ion-label>Melhor dia da semana</ion-label>
+      <ion-select [(ngModel)]="sugerirform.melhordia" name="melhordia" multiple="true">
+        <ion-option>Seg. a sex.</ion-option>
+        <ion-option>Sab</ion-option>
+        <ion-option>Dom</ion-option>
+      </ion-select>
+    </ion-item>
 
-        <ion-item>
-            <ion-label>Faixa de preço aceitável</ion-label>
-            <ion-select [(ngModel)]="sugerirform.valor" name="valor" multiple="true">
-              <ion-option>Até R$30</ion-option>
-              <ion-option>Entre R$30 e R$100</ion-option>
-              <ion-option>Mais de R$100</ion-option>
-            </ion-select>
-          </ion-item>        
+    <ion-item>
+      <ion-label>Melhor hora do dia</ion-label>
+      <ion-select [(ngModel)]="sugerirform.melhorhora" name="melhorhora" multiple="true">
+        <ion-option>Manhã</ion-option>
+        <ion-option>Tarde</ion-option>
+        <ion-option>Noite</ion-option>
+        <ion-option>Madrugada</ion-option>
+      </ion-select>
+    </ion-item>
 
-  
-  
+    <ion-item>
+      <ion-label>Tipo de público</ion-label>
+      <ion-select [(ngModel)]="sugerirform.pub" name="pub" multiple="true">
+        <ion-option>Infantil</ion-option>
+        <ion-option>Estudante</ion-option>
+        <ion-option>Adulto</ion-option>
+        <ion-option>Adolescente</ion-option>
+        <ion-option>Qualquer</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Faixa de preço aceitável</ion-label>
+      <ion-select [(ngModel)]="sugerirform.valor" name="valor" multiple="true">
+        <ion-option>Até R$30</ion-option>
+        <ion-option>Entre R$30 e R$100</ion-option>
+        <ion-option>Mais de R$100</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+
     <button id="sugest-button13" ion-button color="balanced" block on-click="cadastrar()">
       Salvar
     </button>
@@ -91,4 +95,7 @@
     <button id="sugest-button14" ion-button color="balanced" block on-click="goTolistaProx()">
       Voltar
     </button>
-  </ion-content>
+  </div>
+  <ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
+
+</ion-content>

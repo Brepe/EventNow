@@ -1,9 +1,9 @@
 import { Component, Injectable } from '@angular/core';
 import { NavController, NavParams,ToastController  } from 'ionic-angular';
-import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
+import { HomePage } from '../home/home';
 //import { MapProxPagePage } from '../Map-prox/Map-prox';
 
-import { NovolocalPage } from '../novolocal/novolocal';
+import { Novoevento2Page } from '../novoevento2/novoevento2';
 import { listaProxPage } from '../lista-prox/lista-prox';
 import {  AngularFireDatabaseModule } from "angularfire2/database";
 import {
@@ -85,9 +85,9 @@ presentToast() {
 goToMapProxPage(params){
   if (!params) params = {};
 this.navCtrl.push(MapProxPage);
-}goToProjetoTCCBrenda(params){
+}goToHome(params){
   if (!params) params = {};
-  this.navCtrl.push(ProjetoTCCBrendaPage);
+  this.navCtrl.push(HomePage);
 }goTolistaProx(params){
   if (!params) params = {};
   this.navCtrl.push(listaProxPage);

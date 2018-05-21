@@ -1,39 +1,75 @@
 <ion-header>
-  <ion-navbar color="app">
-    <ion-title>
-      Auto Complete
+  <ion-navbar>
+
+
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu">
+          <!--para menu aparecer no cantinho-->
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>TCC Brenda
     </ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content padding id="page1">
+  <div *ngIf="use | async; else elseBlock">
+    <ion-list id="Home-list2">
+      <ion-item color="balanced" id="Home-list-item1">
+        Bem-vindo aos Eventos!
+      </ion-item>
+    </ion-list>
+    <div id="Home-markdown3" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        Este projeto tem como objetivo explorar o uso do geolocalizador em conjunto framework ionic, para dispositivos móveis. O
+        app terá funcionalidades de encontrar situação de eventos, feiras, praias próximas do utilizador em tempo real, de
+        acordo com cadastro e contando com avaliação de outros usuários.
 
-<ion-content padding>
-  <ion-item>
-    <ion-label floating>Digite o endereço
-      <br>e escolha uma sugestão:</ion-label>
-    <ion-input id="myadress" #myadress type="text"></ion-input>
-  </ion-item>
+      </p>
+      <p>Também serve como ferramenta de auxilio para criadores de evento, pois usuários podem sugerir eventos que gostariam
+        de ter em sua região.</p>
+      <br>
+    </div>
 
-  <ion-item>
-    Endereço:
-    <br> {{endereco}}
-  </ion-item>
-  <ion-item>
-    Latitude: {{latitude}}
-    <br> Latitude: <ion-input id="mylat" #mylat type="text" [(ngModel)]="latitude"></ion-input>
-  </ion-item>
-  <ion-item>
-    Longitude: {{longitude}}
-    <br> Longitude: <ion-input id="mylon" #mylon type="text" [(ngModel)]="longitude"></ion-input>
-  </ion-item>
+    <button id="Home-button9" ion-button color="balanced" block on-click="logout()">
+      Sair </button>
+  </div>
 
-  <!--button (click)="submitForm(endereco.value, latitude.value, longitude.value)">Save</button>
+  <ng-template #elseBlock>
+    <div id="Home-markdown3" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        Este projeto tem como objetivo explorar o uso do geolocalizador em conjunto framework ionic, para dispositivos móveis. O
+        app terá funcionalidades de encontrar situação de eventos, feiras, praias próximas do utilizador em tempo real, de
+        acordo com cadastro e contando com avaliação de outros usuários.
 
+      </p>
+      <p>Também serve como ferramenta de auxilio para criadores de evento, pois usuários podem sugerir eventos que gostariam
+        de ter em sua região.</p>
+      <br>
+    </div>
+    <form id="Home-form1">
+      <ion-item id="Home-input2">
+        <ion-label>
+          Insira seu e-mail
+        </ion-label>
+        <ion-input type="text" name="email" [(ngModel)]="usuario.email" placeholder=""></ion-input>
 
-  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map-->
-<br>
-  <button ion-button  (click)="this._myService.setData(endereco,mylat.value,mylon.value);goToNovolocal(); adressdata = endereco; latdata=mylat.value; londata=mylon.value;">Continuar</button>
-  <br>Object data: {{adressdata}}<br>{{latdata}}{{londata}}
+      </ion-item>
+      <ion-item id="Home-input3">
+        <ion-label>
+          Insira uma senha
+        </ion-label>
+        <ion-input type="text" name="pass" [(ngModel)]="usuario.password" placeholder=""></ion-input>
+      </ion-item>
+    </form>
+    <button id="Home-button1" ion-button color="balanced" block on-click="login(usuario)">
+      Entrar
+    </button>
+    <button id="Home-button8" ion-button color="balanced" block on-click="goToCadastro()">
+      Cadastre-se
+    </button>
+  </ng-template>
 
 </ion-content>

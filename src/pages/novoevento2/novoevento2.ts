@@ -2,7 +2,7 @@ import { NavController } from 'ionic-angular';
 import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { MapProxPage } from '../Map-prox/Map-prox';
-import { ProjetoTCCBrendaPage } from '../projeto-tccbrenda/projeto-tccbrenda';
+import { HomePage } from '../home/home';
 import { listaProxPage } from '../lista-prox/lista-prox';
 import { CadastroPage } from '../cadastro/cadastro';
 import { myService } from '../services/data.service';
@@ -37,13 +37,13 @@ export class Listar {//para cadastrar
 }
 
 @Component({
-  selector: 'page-novolocal',
-  templateUrl: 'novolocal.html'
+  selector: 'page-novoevento2',
+  templateUrl: 'novoevento2.html'
 })
 
 
 
-export class NovolocalPage {
+export class Novoevento2Page {
 
   public lat: number;
   public lng: number;
@@ -85,17 +85,17 @@ cadastrar() {//para cadastrar
   goToMapProxPage(params){
     if (!params) params = {};
 this.navCtrl.push(MapProxPage);
-  }goToProjetoTCCBrenda(params){
+  }goToHome(params){
     if (!params) params = {};
-    this.navCtrl.push(ProjetoTCCBrendaPage);
+    this.navCtrl.push(HomePage);
   }goTolistaProx(params){
     if (!params) params = {};
     this.navCtrl.push(listaProxPage);
   }goToCadastro(params){
     if (!params) params = {};
     this.navCtrl.push(CadastroPage);
-  }goToNovolocal(params){
+  }goToNovoevento2(params){
     if (!params) params = {};
-    this.navCtrl.push(NovolocalPage);
+    this.navCtrl.push(Novoevento2Page);
   }
 }

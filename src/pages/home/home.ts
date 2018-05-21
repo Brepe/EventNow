@@ -1,159 +1,85 @@
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MapsAPILoader } from '@agm/core';
-import { FormControl } from "@angular/forms";
-import { } from 'googlemaps';
-//import {} from '@types/googlemaps';
-import { AngularFireList } from 'angularfire2/database';
-import {
-    AngularFireDatabase,
-    FirebaseObjectObservable,
-    FirebaseListObservable
-} from 'angularfire2/database-deprecated';
-import { myService } from '../services/data.service';
 
+import { MapProxPage } from '../Map-prox/Map-prox';
+import { Novoevento2Page } from '../novoevento2/novoevento2';
+import { listaProxPage } from '../lista-prox/lista-prox';
+import { CadastroPage } from '../cadastro/cadastro';
+import {  Userclass } from '../../app/providers/user';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  //<<<<por causa do erro do ngmodule nos cadastros
+import { CommonModule } from '@angular/common'; //<<<<por causa do erro do ngmodule nos cadastros
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { SugerirPage } from '../sugerir/sugerir';
-import { NovolocalPage } from '../novolocal/novolocal';
+import { Observable } from 'rxjs/Observable'; //para o auth firebase ngif
+import * as firebase from 'Firebase';
 
-
-
-declare var google: any;
-
-export class Lista {//para cadastrar
-
-    constructor(public endereco: string, public latitude: number, public longitude: number) { }
-
-
-}
 
 @Component({
-    selector: 'page-home',
-    templateUrl: 'home.html'
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
-
 export class HomePage {
-    adressdata: string;
-    latdata: number;
-    londata: number;
 
+  usuario = {} as Userclass;
+  use: Observable<firebase.User>; //para o auth firebase ngif
 
-    public latitude: number;
-    public longitude: number;
-    public searchControl: FormControl;
-    public zoom: number;
-    public endereco: string;
-    lista: Lista; //para cadastrar
-    listas: FirebaseListObservable<any[]>;//para exibir e cadastrar
+  constructor(public navCtrl: NavController, public afauth: AngularFireAuth) {
+    this.use = afauth.authState; //para o auth firebase ngif
 
-
-    @ViewChild('search') public searchElementRef: ElementRef;
-
-    constructor(private _myService: myService, private database: AngularFireDatabase, public navCtrl: NavController, private mapsAPILoader: MapsAPILoader,
-        private ngZone: NgZone) {
-        this.zoom = 4;
-        this.latitude = 39.8282;
-        this.longitude = -98.5795;
-
-        //create search FormControl
-        this.searchControl = new FormControl();
-
-        //set current position
-        this.setCurrentPosition();
-
-        this.listas = database.list('/listas');
-        console.log(this._myService.getData());
-        console.log(this._myService.getDatalat());
-        console.log(this._myService.getDatalon());
-
-
-
-
-    }
-
-    ionViewDidLoad() {
-        //set google maps defaults
-        this.zoom = 4;
-        this.latitude = 39.8282;
-        this.longitude = -98.5795;
-
-        //create search FormControl
-        this.searchControl = new FormControl();
-
-        //set current position
-        this.setCurrentPosition();
-
-        //load Places Autocomplete
-        this.mapsAPILoader.load().then(() => {
-            let nativeHomeInputBox = document.getElementById('myadress').getElementsByTagName('input')[0];
-            let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
-                types: ["address"]
-            });
-            autocomplete.addListener("place_changed", () => {
-                this.ngZone.run(() => {
-                    //get the place result
-                    let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-                    //verify result
-                    if (place.geometry === undefined || place.geometry === null) {
-                        return;
-                    }
-
-                    //set latitude, longitude and zoom
-                    this.endereco = place.formatted_address;
-                    this.latitude = place.geometry.location.lat();
-                    this.longitude = place.geometry.location.lng();
-                    this.zoom = 12;
-                });
-            });
-        });
-    }
-    goToNovolocal(params) {
-        if (!params) params = {};
-        this.navCtrl.push(NovolocalPage);
-    }
-
-    submitForm(endereco: string, latitude: number, longitude: number) {
-
-        var newAlbum: Lista = new Lista(this.endereco, this.latitude, this.longitude);
-        this.listas.push(newAlbum);
-        console.log(endereco);
-        console.log(newAlbum);
-
-    }
-    /*
-    export class Album {-------------------------feito
-    constructor (public title: string, public artist: string, public description: string) {      }
   }
   
-      constructor(private albumService: AlbumService) { }
-  
-    addAlbum(newAlbum: Album) {
-      this.albums.push(newAlbum);
-  
-    }  submitForm(title: string, artist: string, description: string) {
-      var newAlbum: Album = new Album(title, artist, description);
-      this.albumService.addAlbum(newAlbum);
+  logout() {
+    return this.afauth.auth.signOut();
+    
+  }
+
+  ngOnInit() {
+    this.usuario = {} as Userclass;
+
+    firebase.auth().onAuthStateChanged(function(use) {
+      if (use) {
+        console.log(" User is signed in.");
+      } else {
+        console.log("No user is signed in.");
+      }
+    });
+  }
+
+  // ionViewWillLoad(){
+
+  // }
+
+  async login(usuario: Userclass){
+    try{
+    const result = this.afauth.auth.signInAndRetrieveDataWithEmailAndPassword(usuario.email, usuario.password);
+    if (result){
+    this.navCtrl.push(SugerirPage);
+    alert("a");
     }
-      albums: FirebaseListObservable<any[]>; ---------------------feito
+    }catch(e){
+      console.error(e);
+    }
+  }
+  goToNovoevento2(params){
+    if (!params) params = {};
+    this.navCtrl.push(Novoevento2Page);
+  }
+  goToMapProx(params){
+    if (!params) params = {};
+   this.navCtrl.push(MapProxPage);
+   console.log(params);
+  }
   
-      constructor(private database: AngularFireDatabase) {
-      this.albums = database.list('albums');--------------------------------feito
-    }
-    */
-
-
-
-    private setCurrentPosition() {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                this.latitude = position.coords.latitude;
-                this.longitude = position.coords.longitude;
-                this.zoom = 12;
-            });
-        }
-    }
-
+  goTolistaProx(params){
+    if (!params) params = {};
+    this.navCtrl.push(listaProxPage);
+  }
+  goToCadastro(params){
+    if (!params) params = {};
+    this.navCtrl.push(CadastroPage);
+  }
+  goToHome(params){
+    if (!params) params = {};
+    this.navCtrl.push(HomePage);
+  }
 }
-
-
-
