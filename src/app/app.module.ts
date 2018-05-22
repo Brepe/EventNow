@@ -45,6 +45,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import * as firebase from 'firebase';
 import { NovoeventoPage } from '../pages/novoevento/novoevento';
 import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
+import { MeuseventosPage } from '../pages/meuseventos/meuseventos';
 
 
 
@@ -72,7 +73,8 @@ firebase.initializeApp(config);
     SugestoesPage,
     NovoeventoPage,
     SugerirPage,
-    DetalheseventoPage
+    DetalheseventoPage,
+    MeuseventosPage
 
   ],
   imports: [
@@ -101,7 +103,8 @@ firebase.initializeApp(config);
     SugerirPage,
     SugestoesPage,
     NovoeventoPage,
-    DetalheseventoPage
+    DetalheseventoPage,
+    MeuseventosPage
   ],
   providers: [
     GoogleMaps,

@@ -17,10 +17,9 @@
 <ion-content padding id="page5">
   <div *ngIf="use | async; else elseBlock">
     <div id="sugest-markdown7" class="show-list-numbers-and-dots">
-      <h1>Welcome {{ (use | async)?.email }}!</h1>
       <p style="color:#000000;">
 
-        Nesta área, a pessoa poderá sugerir um evento para organizadores e etc. Essa sugestão aparecerá na lista de sugestões.
+        {{ (use | async)?.email }} nesta área, você poderá sugerir um evento para organizadores. Essa sugestão aparecerá na lista de sugestões.
       </p>
     </div>
     <form id="sugest-form5">

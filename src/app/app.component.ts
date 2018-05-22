@@ -18,6 +18,7 @@ import { SugestoesPage } from '../pages/sugestoes/sugestoes';
 import * as firebase from 'Firebase';
 import { NovoeventoPage } from '../pages/novoevento/novoevento';
 import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
+import { MeuseventosPage } from '../pages/meuseventos/meuseventos';
 
 
 
@@ -40,7 +41,8 @@ export class MyApp {
       { title: 'Mapear eventos', component: MapProxPage },
       { title: 'Listar eventos', component: listaProxPage },
       { title: 'Sugerir', component: SugerirPage },
-      { title: 'Sugestões', component: SugestoesPage }
+      { title: 'Sugestões', component: SugestoesPage },
+      { title: 'Meus eventos', component: MeuseventosPage }
     ];
 
 

@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content padding>
+  <div *ngIf="use | async; else elseBlock">
   <ion-item>
     <ion-label floating>Digite o endereço
       <br>e escolha uma sugestão:</ion-label>
@@ -41,5 +42,11 @@
 <br>
   <button ion-button  (click)="this._myService.setData(endereco,mylat.value,mylon.value);goToNovoevento2(); adressdata = endereco; latdata=mylat.value; londata=mylon.value;">Continuar</button>
   <br>Object data: {{adressdata}}<br>{{latdata}}{{londata}}
+</div>
+
+<!-- a corrigir _____________________________________________________________________  -->
+<ng-template #elseBlock> Faça login para ter acesso a essa página.
+    <ion-input id="myadress"></ion-input>
+</ng-template>
 
 </ion-content>

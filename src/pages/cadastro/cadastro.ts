@@ -18,7 +18,7 @@ import { Http } from '@angular/http';
 import { MapProxPage } from '../Map-prox/Map-prox';
 import { SugerirPage } from '../sugerir/sugerir';
 import { SugestoesPage } from '../sugestoes/sugestoes';
-import { User } from '../../app/providers/user';
+import { Userclass } from '../../app/providers/user';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';  //<<<<por causa do erro do ngmodule nos cadastros
 import { CommonModule } from '@angular/common'; //<<<<por causa do erro do ngmodule nos cadastros
 
@@ -34,7 +34,7 @@ export class User1{//para cadastrar
   templateUrl: 'cadastro.html'
 })
 export class CadastroPage {
-  use = {} as User;
+  use = {} as Userclass;
 
   user: User1; //para cadastrar
   usuario:FirebaseListObservable<any[]>;//para exibir e cadastrar
@@ -50,9 +50,9 @@ export class CadastroPage {
    this.use = new User1();//para cadastrar
 }
 ngOnInit() {
-  this.use = {} as User;
+  this.use = {} as Userclass;
 }
-async cadastrar(use: User){//para cadastrar
+async cadastrar(use: Userclass){//para cadastrar
 
   try{
   const result = await this.afauth.auth.createUserAndRetrieveDataWithEmailAndPassword(use.email, use.password);

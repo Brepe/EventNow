@@ -13,6 +13,7 @@ import {
 } from 'angularfire2/database-deprecated';
 import { Observable } from 'rxjs/Observable'; //para o auth firebase ngif
 import * as firebase from 'Firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @IonicPage()
@@ -25,14 +26,25 @@ export class SugestoesPage {
   use: Observable<firebase.User>; //para o auth firebase ngif
 
   constructor(public db: AngularFireDatabase,
-     public navCtrl: NavController) {
+     public navCtrl: NavController, public afauth: AngularFireAuth) {
 
     this.sugestoes = this.db.list('/sugestoes');//para exibir e cadastrar
     console.log(this.sugestoes);
 
+    this.use = afauth.authState; //para o auth firebase ngif
 
   }
-  
+  ionViewWillLoad(){
+    this.afauth.authState.subscribe(data => console.log(data)
+  );
+  firebase.auth().onAuthStateChanged(function(use) {
+    if (use) {
+      console.log(" User is signed in.");
+    } else {
+      console.log("No user is signed in.");
+    }
+  });
+  }
   
   goToMapProxPage(params) {
     if (!params) params = {};

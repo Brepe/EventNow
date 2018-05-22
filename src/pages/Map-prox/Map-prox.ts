@@ -20,6 +20,8 @@ import {
 import { HomePage } from '../home/home';
 import { myService } from '../services/data.service';
 import { Profile } from '../../app/providers/profile';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 declare var google;
@@ -31,6 +33,7 @@ declare var google;
 })
 export class MapProxPage {
 
+  use: Observable<firebase.User>; //para o auth firebase ngif
 
   eventos: FirebaseListObservable<any[]>; //para exibir e cadastrar
 
@@ -51,8 +54,11 @@ profile ={} as Profile;
 
   constructor (private _myService: myService, public platform: Platform, private device: Device, public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
-    private googleMaps: GoogleMaps, public zone: NgZone) {
-    (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
+    private googleMaps: GoogleMaps, public zone: NgZone, public afauth: AngularFireAuth) {
+    
+      (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
+      this.use = afauth.authState; //para o auth firebase ngif
+
     platform.ready().then(() => {// chama a função principal
       this.displayGoogleMap();
       //this.getMarkers();    
@@ -74,6 +80,18 @@ profile ={} as Profile;
       });
     });
 
+  }
+
+  ionViewWillLoad(){
+    this.afauth.authState.subscribe(data => console.log(data)
+  );
+  firebase.auth().onAuthStateChanged(function(use) {
+    if (use) {
+      console.log(" User is signed in.");
+    } else {
+      console.log("No user is signed in.");
+    }
+  });
   }
 
 

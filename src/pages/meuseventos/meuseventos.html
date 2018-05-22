@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu">
+          <!--para menu aparecer no cantinho-->
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Meus eventos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="use | async; else elseBlock">
+    Com acesso
+    </div>
+    <ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
+
+</ion-content>

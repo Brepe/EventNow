@@ -14,6 +14,9 @@ import { myService } from '../services/data.service';
 
 import { SugerirPage } from '../sugerir/sugerir';
 import { Novoevento2Page } from '../novoevento2/novoevento2';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'Firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 
@@ -32,6 +35,8 @@ export class Lista {//para cadastrar
 })
 
 export class NovoeventoPage {
+    use: Observable<firebase.User>; //para o auth firebase ngif
+
     adressdata: string;
     latdata: number;
     londata: number;
@@ -48,8 +53,9 @@ export class NovoeventoPage {
 
     @ViewChild('search') public searchElementRef: ElementRef;
 
-    constructor(private _myService: myService, private database: AngularFireDatabase, public navCtrl: NavController, private mapsAPILoader: MapsAPILoader,
-        private ngZone: NgZone) {
+    constructor(private _myService: myService, private database: AngularFireDatabase, 
+        public navCtrl: NavController, private mapsAPILoader: MapsAPILoader,
+        private ngZone: NgZone, public afauth: AngularFireAuth) {
         this.zoom = 4;
         this.latitude = 39.8282;
         this.longitude = -98.5795;
@@ -65,10 +71,23 @@ export class NovoeventoPage {
         console.log(this._myService.getDatalat());
         console.log(this._myService.getDatalon());
 
+        this.use = afauth.authState; //para o auth firebase ngif
+
 
 
 
     }
+    ionViewWillLoad(){
+        this.afauth.authState.subscribe(data => console.log(data)
+      );
+      firebase.auth().onAuthStateChanged(function(use) {
+        if (use) {
+          console.log(" User is signed in.");
+        } else {
+          console.log("No user is signed in.");
+        }
+      });
+      }
 
     ionViewDidLoad() {
         //set google maps defaults
