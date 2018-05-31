@@ -54,7 +54,6 @@ export class MapProxPage {
   ionViewWillEnter() {
 
     this.displayGoogleMap();
-    this.PutjsonInMap();
   }
 
   displayGoogleMap() {
@@ -70,8 +69,8 @@ export class MapProxPage {
 
         }
         this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
-        console.log(this.mapContainer.nativeElement);
-        console.log("haaaaaaaaaaaaa");
+
+        this.PutjsonInMap(); //deixei essa função aqui para o mapa carregar os markers toda vez que eu entrar, não só na primeira
 
       }).catch((error) => {
         console.log('Erro ao recuperar sua posição', error);
@@ -98,7 +97,6 @@ export class MapProxPage {
   setMapOnAll(map) {
     for (var i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(map);
-      console.log("mark" + i + map)
     }
   }
 
@@ -106,15 +104,6 @@ export class MapProxPage {
     for (let _i = 0; _i < this.markers.length; _i++) {
       if (_i > 0)
         this.addMarkersToMap(this.markers[_i]); //carrega cada markers nessa função}}*/
-
-  resetMapContainer(div: string, visible: boolean) { //para recarregar o map toda vez q abrir, e mostrar os markers
-    setTimeout(() => {
-      if (this.map) {
-        this.map.setDiv(div);
-        this.map.setVisible(visible);
-      }
-    }, 600) // timeout is a bit of a hack but it helps here
-  }
 
   addMarker(location, image, ender, tudo, evento) {
     console.log("passando por addmarker")
@@ -126,7 +115,7 @@ export class MapProxPage {
 
     this.markers.push(marker);
     var endere = ender;
-    // Parâmetros do texto que será exibido no clique; 
+    // Parâmetros do texto que será exibido no clique ---------------------------------------------
     var contentString = '<h3>' + evento + '</h3><br>' + endere +
       "<br><button onclick=\"window.angularComponent.GoDetail('" + tudo + "')\" >Detalhes</button>";
 
@@ -136,7 +125,7 @@ export class MapProxPage {
       maxHeight: 100
     });
 
-    // Exibir texto ao clicar no ícone;
+    // Exibir texto ao clicar no ícone ----------------------------
     google.maps.event.addListener(marker, 'click', function () {
       infowindow.open(this.map, marker);
     });
