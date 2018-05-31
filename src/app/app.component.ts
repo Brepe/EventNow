@@ -19,6 +19,7 @@ import * as firebase from 'Firebase';
 import { NovoeventoPage } from '../pages/novoevento/novoevento';
 import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
 import { MeuseventosPage } from '../pages/meuseventos/meuseventos';
+import { EditareventoPage } from '../pages/editarevento/editarevento';
 
 
 
@@ -42,7 +43,7 @@ export class MyApp {
       { title: 'Listar eventos', component: listaProxPage },
       { title: 'Sugerir', component: SugerirPage },
       { title: 'Sugestões', component: SugestoesPage },
-      { title: 'Meus eventos', component: MeuseventosPage }
+      { title: 'Meus eventos', component: MeuseventosPage },
     ];
 
 

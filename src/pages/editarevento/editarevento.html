@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>{{ title }}</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    {{contact.$key}}
+    <form [formGroup]="form">
+        <ion-item>
+            <ion-label stacked>key</ion-label>
+            <ion-input type="text" formControlName="key"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Término</ion-label>
+              <ion-datetime displayFormat="MMM DD YYYY"  formControlName="timeEnds"></ion-datetime>
+            </ion-item>
+      <ion-item>
+        <ion-label stacked>Nome</ion-label>
+        <ion-input type="text" formControlName="event"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.event.valid && (form.controls.event.dirty || form.controls.event.touched)" color="danger">
+        <div [hidden]="!form.controls.event.errors.required">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label stacked>Telefone</ion-label>
+        <ion-input type="text" formControlName="description"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!form.controls.description.valid && (form.controls.description.dirty || form.controls.description.touched)" color="danger">
+        <div [hidden]="!form.controls.description.errors.required">
+          O campo é obrigatório
+        </div>
+      </ion-item>
+  
+      <div padding>
+        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Salvar</button>
+        <!--  -->
+      </div>
+    </form>
+  </ion-content>

@@ -6,13 +6,16 @@ import { HomePage } from '../home/home';
 import { listaProxPage } from '../lista-prox/lista-prox';
 import { CadastroPage } from '../cadastro/cadastro';
 import { myService } from '../services/data.service';
-import {SugerirPage} from '../sugerir/sugerir';
+import { SugerirPage } from '../sugerir/sugerir';
 import { AngularFireList } from 'angularfire2/database';
 import {
-    AngularFireDatabase,
-    FirebaseObjectObservable,
-    FirebaseListObservable
+  AngularFireDatabase,
+  FirebaseObjectObservable,
+  FirebaseListObservable
 } from 'angularfire2/database-deprecated';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'Firebase';
+import { Observable } from 'rxjs/Observable';
 
 
 /*export class Lista {//para cadastrar
@@ -32,7 +35,7 @@ export class Listar {//para cadastrar
   timeEnds: string;
   month: string;
   description: string;
-  event:string;
+  event: string;
 
 }
 
@@ -44,25 +47,27 @@ export class Listar {//para cadastrar
 
 
 export class Novoevento2Page {
-
+  authid;
+  use: Observable<firebase.User>; //para o auth firebase ngif
   public lat: number;
   public lng: number;
   public endereco: string;
   lista: Listar; //para cadastrar
   listas: FirebaseListObservable<any[]>;//para exibir e cadastrar
 
-public example: string;
+  public example: string;
 
-  constructor(private database: AngularFireDatabase,public navCtrl: NavController,private _myService: myService) {    
+  constructor(private database: AngularFireDatabase, public navCtrl: NavController,
+    private _myService: myService, public afauth: AngularFireAuth) {
     console.log(this._myService.getData());
     console.log(this._myService.getDatalat());
     console.log(this._myService.getDatalon());
-/* this.endereco = this._myService.getData();
- this.lat = this._myService.getDatalat();
- this.lng = this._myService.getDatalon();*/
+
+    this.use = afauth.authState; //para o auth firebase ngif
+    this.use.subscribe(result => this.authid = result.email);
 
     this.listas = this.database.list('/eventos');
-  this.lista = new Listar();//para cadastrar
+    this.lista = new Listar();//para cadastrar
 
 
   }
@@ -74,27 +79,41 @@ public example: string;
     console.log(newAlbum);
 
 }*/
-cadastrar() {//para cadastrar
-  this.listas.push(this.lista).then(() => {
-  //  this.lista = new Lista();
-     console.log(this.lista);
-  });
-}
+  ionViewWillLoad() {
+    this.afauth.authState.subscribe(data => console.log(data)
+    );
+
+    firebase.auth().onAuthStateChanged(function (use) {
+      //this.authmail = use.email;
+      if (use) {
+        console.log(" User is signed in.");
+      } else {
+        console.log("No user is signed in.");
+      }
+    });
+    //console.log(this.authmail);
+  }
+  cadastrar() {//para cadastrar
+    this.listas.push(this.lista).then(() => {
+      //  this.lista = new Lista();
+      console.log(this.lista);
+    });
+  }
 
 
-  goToMapProxPage(params){
+  goToMapProxPage(params) {
     if (!params) params = {};
-this.navCtrl.push(MapProxPage);
-  }goToHome(params){
+    this.navCtrl.push(MapProxPage);
+  } goToHome(params) {
     if (!params) params = {};
     this.navCtrl.push(HomePage);
-  }goTolistaProx(params){
+  } goTolistaProx(params) {
     if (!params) params = {};
     this.navCtrl.push(listaProxPage);
-  }goToCadastro(params){
+  } goToCadastro(params) {
     if (!params) params = {};
     this.navCtrl.push(CadastroPage);
-  }goToNovoevento2(params){
+  } goToNovoevento2(params) {
     if (!params) params = {};
     this.navCtrl.push(Novoevento2Page);
   }

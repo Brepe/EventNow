@@ -4,10 +4,8 @@ import { Geolocation } from '@ionic-native/geolocation'; //plugin nativo cordova
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { DetalheseventoPage } from '../detalhesevento/detalhesevento';
-
 import * as firebase from 'Firebase';
 import { Device } from '@ionic-native/device';
-
 import {
   GoogleMaps,
   GoogleMap,
@@ -16,16 +14,13 @@ import {
   CameraPosition,
   MarkerOptions
 } from '@ionic-native/google-maps';
-
 import { HomePage } from '../home/home';
 import { myService } from '../services/data.service';
 import { Profile } from '../../app/providers/profile';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-
 declare var google;
-
 
 @Component({
   selector: 'Map-prox-page',
@@ -34,14 +29,11 @@ declare var google;
 export class MapProxPage {
 
   use: Observable<firebase.User>; //para o auth firebase ngif
-
   eventos: FirebaseListObservable<any[]>; //para exibir e cadastrar
-
   markers = [];
-
   map: GoogleMap;
   position: any = {};
-profile ={} as Profile;
+  profile = {} as Profile;
   // position: any;
   //Criar um viewchild para o elemento da div poder ser visto aqui e não dar o erro de falta de first child. Ref 
   @ViewChild('map') mapContainer: ElementRef;
@@ -49,59 +41,21 @@ profile ={} as Profile;
   //map: any;
 
   ref = firebase.database().ref('eventos/');  //ref do bd pra buscar as latlng
+  initialMapLoad: boolean = true; //para recarregar o map toda vez q abrir, e mostrar os markers
 
-
-
-  constructor (private _myService: myService, public platform: Platform, private device: Device, public db: AngularFireDatabase,
+  constructor(private _myService: myService, public platform: Platform, private device: Device, public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
     private googleMaps: GoogleMaps, public zone: NgZone, public afauth: AngularFireAuth) {
-    
-      (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
-      this.use = afauth.authState; //para o auth firebase ngif
 
-    platform.ready().then(() => {// chama a função principal
-      this.displayGoogleMap();
-      //this.getMarkers();    
-
-    });
-
-    this.ref.on('value', resp => {
-      snapshotToArray(resp).forEach(data => {//chama cada dado que foi passado de json para array
-        let lat = parseFloat(data.lat);
-        let lng = parseFloat(data.lng);
-        let ender = data.endereco;
-        let tudo = data.key;
-        let evento = data.event;
-
-        let image = 'assets/img/point.png';
-        let updatelocation = new google.maps.LatLng(lat, lng);
-        this.addMarker(updatelocation, image, ender, tudo, evento); //adiciona latlng de cada um e a img de ponto
-        this.setMapOnAll(this.map); //coloca para exibir tudo no mapa
-      });
-    });
-
+    (window as any).angularComponent = { GoDetail: this.GoDetail, zone: zone };
+    this.use = afauth.authState; //para o auth firebase ngif
   }
 
-  ionViewWillLoad(){
-    this.afauth.authState.subscribe(data => console.log(data)
-  );
-  firebase.auth().onAuthStateChanged(function(use) {
-    if (use) {
-      console.log(" User is signed in.");
-    } else {
-      console.log("No user is signed in.");
-    }
-  });
+  ionViewWillEnter() {
+
+    this.displayGoogleMap();
+    this.PutjsonInMap();
   }
-
-
-  GoDetail = (idk: any) => {
-    this.zone.run(() => { //Navigate To New Page 
-      this.navCtrl.push(DetalheseventoPage,{idk});
-      
-    });
-  }
-
 
   displayGoogleMap() {
 
@@ -116,32 +70,54 @@ profile ={} as Profile;
 
         }
         this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
-
-
+        console.log(this.mapContainer.nativeElement);
+        console.log("haaaaaaaaaaaaa");
 
       }).catch((error) => {
         console.log('Erro ao recuperar sua posição', error);
       });
-
   }
 
+  PutjsonInMap() {
+    this.ref.on('value', resp => {
+      snapshotToArray(resp).forEach(data => {//chama cada dado que foi passado de json para array
+        let lat = parseFloat(data.lat);
+        let lng = parseFloat(data.lng);
+        let ender = data.endereco;
+        let tudo = data.key;
+        let evento = data.event;
+
+        let image = 'assets/img/point.png';
+        let updatelocation = new google.maps.LatLng(lat, lng);
+        this.addMarker(updatelocation, image, ender, tudo, evento); //adiciona latlng de cada um e a img de ponto
+        this.setMapOnAll(this.map); //coloca para exibir tudo no mapa
+      });
+    });
+  }
 
   setMapOnAll(map) {
     for (var i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(map);
+      console.log("mark" + i + map)
     }
   }
+
   /*getMarkers() { // array com os markers
     for (let _i = 0; _i < this.markers.length; _i++) {
       if (_i > 0)
-        this.addMarkersToMap(this.markers[_i]); //carrega cada markers nessa função
+        this.addMarkersToMap(this.markers[_i]); //carrega cada markers nessa função}}*/
 
-
-    }
-  }*/
-
+  resetMapContainer(div: string, visible: boolean) { //para recarregar o map toda vez q abrir, e mostrar os markers
+    setTimeout(() => {
+      if (this.map) {
+        this.map.setDiv(div);
+        this.map.setVisible(visible);
+      }
+    }, 600) // timeout is a bit of a hack but it helps here
+  }
 
   addMarker(location, image, ender, tudo, evento) {
+    console.log("passando por addmarker")
     let marker = new google.maps.Marker({
       position: location,
       map: this.map,
@@ -151,33 +127,39 @@ profile ={} as Profile;
     this.markers.push(marker);
     var endere = ender;
     // Parâmetros do texto que será exibido no clique; 
-    var contentString = '<h3>'+ evento+'</h3><br>' + endere + 
-    "<br><button onclick=\"window.angularComponent.GoDetail('" + tudo + "')\" >Detalhes</button>";
-
-
+    var contentString = '<h3>' + evento + '</h3><br>' + endere +
+      "<br><button onclick=\"window.angularComponent.GoDetail('" + tudo + "')\" >Detalhes</button>";
 
     var infowindow = new google.maps.InfoWindow({
       content: contentString,
       maxWidth: 100,
       maxHeight: 100
-
     });
+
     // Exibir texto ao clicar no ícone;
     google.maps.event.addListener(marker, 'click', function () {
       infowindow.open(this.map, marker);
     });
-
   }
 
-  /*/addMarkersToMap(markers) { //para carregar um marker no mapa
-    var position = new google.maps.LatLng(markers.lat, markers.lng);
-    var markersMarker = new google.maps.Marker({ position: position, title: markers.name });
-    markersMarker.setMap(this.map);
-  }*/
+  ionViewWillLoad() {
+    this.afauth.authState.subscribe(data => console.log(data)
+    );
+    firebase.auth().onAuthStateChanged(function (use) {
+      if (use) {
+        console.log(" User is signed in.");
+      } else {
+        console.log("No user is signed in.");
+      }
+    });
+  }
 
 
-
-  // this.eventos = this.db.list('/eventos');//para exibir e cadastrar
+  GoDetail = (idk: any) => {
+    this.zone.run(() => { //Navigate To New Page 
+      this.navCtrl.push(DetalheseventoPage, { idk });
+    });
+  }
 
 } //fecha classe
 
@@ -193,47 +175,3 @@ export const snapshotToArray = snapshot => {//func para converter de json do bd 
   return returnArr;
 };
 
-
-/*
-addMarkerToMap(mapElement, infowindow,lat, lng) {
-var marker = new google.maps.Marker({
-position: new google.maps.LatLng(lat, lng),
-map: mapElement
-});
-}
-//Colocar o que tem que ser mostrado na tela nessa função
-ionViewDidLoad() {
-  //aqui pra pegar loc atual
-  this.geolocation.getCurrentPosition()
-    .then((resp) => {
-      const position = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-      const mapOptions = {
-        zoom: 18,
-        center: position
-      }
-      this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      var exx = this.db.list('/eventos/Eventotestes/lat');
-      var exy='-43.689167';
-      this.addMarkerToMap(this.map, infowindow,exx, exy);
-      const marker = new google.maps.Marker({
-        position: position,
-        map: this.map
-      });
-      // Parâmetros do texto que será exibido no clique;
-      var contentString = '<h2>Marco Zero</h2>' +
-        '<p>Praça Rio Branco, Recife/PE.</p>' +
-        '<a href="http://pt.wikipedia.org/wiki/Pra%C3%A7a_Rio_Branco_(Recife)" target="_blank">clique aqui para mais informações</a>';
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString,
-        maxWidth: 700
-      });
-      // Exibir texto ao clicar no ícone;
-      google.maps.event.addListener(marker, 'click', function () {
-        infowindow.open(this.map, marker);
-      });
-    }).catch((error) => {
-      console.log('Erro ao recuperar sua posição', error);
-    });
-}
-
-//}*/

@@ -46,6 +46,8 @@ import * as firebase from 'firebase';
 import { NovoeventoPage } from '../pages/novoevento/novoevento';
 import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
 import { MeuseventosPage } from '../pages/meuseventos/meuseventos';
+import { EditareventoPage } from '../pages/editarevento/editarevento';
+import { ProviderProvider } from '../pages/provider';
 
 
 
@@ -74,7 +76,8 @@ firebase.initializeApp(config);
     NovoeventoPage,
     SugerirPage,
     DetalheseventoPage,
-    MeuseventosPage
+    MeuseventosPage,
+    EditareventoPage
 
   ],
   imports: [
@@ -104,7 +107,8 @@ firebase.initializeApp(config);
     SugestoesPage,
     NovoeventoPage,
     DetalheseventoPage,
-    MeuseventosPage
+    MeuseventosPage,
+    EditareventoPage
   ],
   providers: [
     GoogleMaps,
@@ -114,7 +118,8 @@ firebase.initializeApp(config);
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Geolocation, //provider p geoloc nativo
     myService,
-    Device
+    Device,
+    ProviderProvider
   ]
 })
 export class AppModule {
