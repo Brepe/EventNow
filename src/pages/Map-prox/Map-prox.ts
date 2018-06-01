@@ -63,9 +63,10 @@ export class MapProxPage {
         let mypos = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
 
         let mapOptions = {//opções da visualização do mapa
-          zoom: 18,
+          zoom: 15,
           center: mypos,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: google.maps.MapTypeId.ROADMAP//,
+          //disableDefaultUI: true
 
         }
         this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
@@ -85,8 +86,25 @@ export class MapProxPage {
         let ender = data.endereco;
         let tudo = data.key;
         let evento = data.event;
+        let top = data.toppings;
+        let image;
 
-        let image = 'assets/img/point.png';
+        if (top[0]=="Festa"){
+          image = 'assets/img/party.png';
+        } else if (top[0]=="Feira"){
+          image = 'assets/img/feira.png';
+        } else if (top[0]=="Praia"){
+          image = 'assets/img/beach.png';
+        } else if (top[0]=="Show"){
+          image = 'assets/img/show.png';
+        } else if (top[0]=="Evento cultural"){
+          image = 'assets/img/cult.png';
+        } else if (top[0]=="Outros"){
+          image = 'assets/img/other.png';
+        } else{
+          image = 'assets/img/err.png';
+        }
+
         let updatelocation = new google.maps.LatLng(lat, lng);
         this.addMarker(updatelocation, image, ender, tudo, evento); //adiciona latlng de cada um e a img de ponto
         this.setMapOnAll(this.map); //coloca para exibir tudo no mapa
