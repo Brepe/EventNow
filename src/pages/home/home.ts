@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 import { MapProxPage } from '../Map-prox/Map-prox';
 import { Novoevento2Page } from '../novoevento2/novoevento2';
@@ -12,6 +12,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { SugerirPage } from '../sugerir/sugerir';
 import { Observable } from 'rxjs/Observable'; //para o auth firebase ngif
 import * as firebase from 'Firebase';
+import { MeuseventosPage } from '../meuseventos/meuseventos';
 
 
 @Component({
@@ -19,11 +20,11 @@ import * as firebase from 'Firebase';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
   usuario = {} as Userclass;
   use: Observable<firebase.User>; //para o auth firebase ngif
+  private msgErro : any;
 
-  constructor(public navCtrl: NavController, public afauth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public afauth: AngularFireAuth,     private toast: ToastController) {
     this.use = afauth.authState; //para o auth firebase ngif
 
   }
@@ -53,13 +54,36 @@ export class HomePage {
     try{
     const result = this.afauth.auth.signInAndRetrieveDataWithEmailAndPassword(usuario.email, usuario.password);
     if (result){
-    this.navCtrl.push(SugerirPage);
-    alert("a");
+      console.log(result);
+    this.navCtrl.setRoot(MeuseventosPage);
     }
+  
     }catch(e){
-      console.error(e);
+      this.toast.create({ message: 'Digite corretamente login e senha.', duration: 3000 }).present();
+
+    console.error(e);
+
     }
+    ////////////////////////////////////////////////////
+    // let _this = this;
+
+    // firebase.auth().signInAndRetrieveDataWithEmailAndPassword(usuario.email, usuario.password)
+    // .catch(function(err : firebase.FirebaseError) {
+    //      if (err.code){
+    //           if (err.code === 'auth/weak-password') {
+    //              _this.msgErro = "A senha deve conter no mínimo 6 caracteres";
+    //          }
+    //          else if(err.code === 'auth/invalid-email'){
+    //             _this.msgErro = "O email informado é invalido";
+    //          }
+    //          else {
+    //              _this.msgErro = "O email informado ja está cadastrado";
+    //          }
+    //      }
+    //  });
   }
+
+  
   goToNovoevento2(params){
     if (!params) params = {};
     this.navCtrl.push(Novoevento2Page);

@@ -15,30 +15,29 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page5">
-  <!-- ion-input type="text" [(ngModel)]="lista.authmail" name="authmail" value="{{authmail}}" placeholder=""></ion-input-->
 
   <ion-list>
-    <div style="float:left; clear:both;">
-      <ion-item id="input8">
-        <ion-label>Nome do evento</ion-label>
+    <!-- <div style="float:left; clear:both;"> -->
+      <ion-item id="input1">
+        <ion-label stacked>Nome do evento</ion-label>
         <ion-input type="text" [(ngModel)]="lista.event" name="event" placeholder=""></ion-input>
       </ion-item>
-      <ion-item id="input9">
-        <ion-label>Descrição</ion-label>
-        <ion-input type="text" [(ngModel)]="lista.description" name="description" placeholder=""></ion-input>
-      </ion-item>
       <ion-item id="input2">
-        <ion-label>Endereço</ion-label>
-        <ion-input type="text" [(ngModel)]="lista.endereco" name="endereco" value="{{_myService.getData()}}"></ion-input>
+        <ion-label stacked>Descrição</ion-label>
+
+        <ion-textarea type="text" [(ngModel)]="lista.description" name="description" placeholder="" rows="2" maxLength="500"></ion-textarea>
+
       </ion-item>
-      <ion-item id="input5">
-        <ion-label>UF</ion-label>
-        <ion-input type="text" [(ngModel)]="lista.uf" name="uf"></ion-input>
+      <ion-item id="input3">
+        <ion-label stacked>Endereço</ion-label>
+        <!-- <ion-input type="text" [(ngModel)]="lista.endereco" name="endereco" value="{{_myService.getData()}}"></ion-input> -->
+        <ion-textarea readonly type="text" [(ngModel)]="lista.endereco" name="endereco" value="{{_myService.getData()}}" rows="2" maxLength="500"></ion-textarea>
+
       </ion-item>
-    </div>
+    <!-- </div> -->
     <ion-item>
-      <ion-label>Tipo</ion-label>
-      <ion-select [(ngModel)]="lista.toppings" multiple="true">
+      <ion-label stacked>Tipo</ion-label>
+      <ion-select [(ngModel)]="lista.toppings" multiple="false">
         <ion-option>Evento cultural</ion-option>
         <ion-option>Praia</ion-option>
         <ion-option>Show</ion-option>
@@ -47,34 +46,47 @@
         <ion-option>Outros</ion-option>
       </ion-select>
     </ion-item>
+    <ion-item>
+      <ion-label stacked>Classificação etária</ion-label>
+      <ion-select [(ngModel)]="lista.etaria" multiple="false">
+        <ion-option>18</ion-option>
+        <ion-option>16</ion-option>
+        <ion-option>14</ion-option>
+        <ion-option>12</ion-option>
+        <ion-option>Livre</ion-option>
+      </ion-select>
+    </ion-item>
 
 
     <ion-item>
-      <ion-label>Início</ion-label>
+      <ion-label stacked>Início</ion-label>
       <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="lista.month"></ion-datetime>
     </ion-item>
 
 
     <ion-item>
-      <ion-label>Hora</ion-label>
+      <ion-label stacked>Hora Início</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="lista.timeStarts"></ion-datetime>
     </ion-item>
+  
 
     <ion-item>
-      <ion-label>Término</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="lista.timeEnds"></ion-datetime>
+      <ion-label stacked>Término</ion-label>
+      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="lista.dayEnds"></ion-datetime>
     </ion-item>
+    <ion-item>
+      <ion-label stacked>Hora Término</ion-label>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="lista.timeEnds"></ion-datetime>
+    </ion-item>
+
     <div class="hid">
-      <ion-item id="input3">
-        <ion-label>Latitude</ion-label>
+      <ion-item id="input4">
         <ion-input type="number" [(ngModel)]="lista.lat" name="lat" value={{_myService.getDatalat()}}></ion-input>
       </ion-item>
-      <ion-item id="input4">
-        <ion-label>Longitude</ion-label>
+      <ion-item id="input5">
         <ion-input type="number" [(ngModel)]="lista.lng" name="lng" value={{_myService.getDatalon()}}></ion-input>
       </ion-item>
-      <ion-item id="input5">
-        <ion-label>auth</ion-label>
+      <ion-item id="input6">
         <ion-input type="text" [(ngModel)]="lista.authid" name="auth" value={{authid}}></ion-input>
       </ion-item>
     </div>

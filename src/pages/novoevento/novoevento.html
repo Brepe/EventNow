@@ -1,10 +1,11 @@
 <ion-header>
-    <ion-buttons start>
-        <button ion-button icon-only menuToggle>
-          <ion-icon name="menu"> <!--para menu aparecer no cantinho-->
-          </ion-icon>
-        </button>
-      </ion-buttons>
+  <ion-buttons start>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu">
+        <!--para menu aparecer no cantinho-->
+      </ion-icon>
+    </button>
+  </ion-buttons>
   <ion-navbar color="app">
     <ion-title>
       Novo evento
@@ -14,39 +15,33 @@
 
 <ion-content padding>
   <div *ngIf="use | async; else elseBlock">
-  <ion-item>
-    <ion-label floating>Digite o endereço
-      <br>e escolha uma sugestão:</ion-label>
-    <ion-input id="myadress" #myadress type="text"></ion-input>
-  </ion-item>
+    <ion-list>
+    <ion-item>
+      <ion-label stacked>Digite o endereço
+        <br>e escolha uma sugestão:</ion-label>
+      <ion-input id="myadress" #myadress type="text" (click)="loadplaces()" ></ion-input>
+    </ion-item>
 
-  <ion-item>
-    Endereço:
-    <br> {{endereco}}
-  </ion-item>
-  <ion-item>
-    Latitude: {{latitude}}
-    <br> Latitude: <ion-input id="mylat" #mylat type="text" [(ngModel)]="latitude"></ion-input>
-  </ion-item>
-  <ion-item>
-    Longitude: {{longitude}}
-    <br> Longitude: <ion-input id="mylon" #mylon type="text" [(ngModel)]="longitude"></ion-input>
-  </ion-item>
+    <ion-item text-wrap>
+      <!-- <span style="font-size:4vw">Endereço escolhido:</span>
+      <br> -->{{endereco}} 
+      </ion-item>
+  </ion-list>
+    <div class="hid">
 
-  <!--button (click)="submitForm(endereco.value, latitude.value, longitude.value)">Save</button>
+      <ion-input id="mylat" #mylat type="text" [(ngModel)]="latitude"></ion-input>
+      <ion-input id="mylon" #mylon type="text" [(ngModel)]="longitude"></ion-input>
+    </div>
 
+    <br>
+    <button ion-button (click)="this._myService.setData(endereco,mylat.value,mylon.value);goToNovoevento2(); adressdata = endereco; latdata=mylat.value; londata=mylon.value;">Continuar</button>
 
-  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map-->
-<br>
-  <button ion-button  (click)="this._myService.setData(endereco,mylat.value,mylon.value);goToNovoevento2(); adressdata = endereco; latdata=mylat.value; londata=mylon.value;">Continuar</button>
-  <br>Object data: {{adressdata}}<br>{{latdata}}{{londata}}
-</div>
+  </div>
 
-<!-- a corrigir _____________________________________________________________________  -->
-<ng-template #elseBlock> Faça login para ter acesso a essa página.
-    <ion-input id="myadress"></ion-input>
-</ng-template>
+  <!-- a corrigir _____________________________________________________________________  -->
+  <ng-template #elseBlock> Faça login para ter acesso a essa página.
+      <ion-input id="myadress" #myadress ></ion-input>
+
+  </ng-template>
 
 </ion-content>

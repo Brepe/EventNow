@@ -21,7 +21,7 @@ export class DetalheseventoPage {
   lat: string = "a";
   lng: string = "a";
   month: string = "a";
-  timeEnds: string = "a";
+  dayEnds: string = "a";
   timeStarts: string = "a";
   toppings: string = "a";
   uf: string = "a";
@@ -41,7 +41,7 @@ export class DetalheseventoPage {
       this.lat = snapshot.val().lat;
       this.lng = snapshot.val().lng;
       this.month = snapshot.val().month;
-      this.timeEnds = snapshot.val().timeEnds;
+      this.dayEnds = snapshot.val().dayEnds;
       this.timeStarts = snapshot.val().timeStarts;
       this.toppings = snapshot.val().toppings;
       this.uf = snapshot.val().uf;

@@ -102,30 +102,34 @@ export class NovoeventoPage {
         this.setCurrentPosition();
 
         //load Places Autocomplete
-        this.mapsAPILoader.load().then(() => {
-            let nativeHomeInputBox = document.getElementById('myadress').getElementsByTagName('input')[0];
-            let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
-                types: ["address"]
-            });
-            autocomplete.addListener("place_changed", () => {
-                this.ngZone.run(() => {
-                    //get the place result
-                    let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+        this.loadplaces();
+    }
+loadplaces(){
+    this.mapsAPILoader.load().then(() => {
+        let nativeHomeInputBox = document.getElementById('myadress').getElementsByTagName('input')[0];
+        let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
+            types: ["address"]
+        });
+        autocomplete.addListener("place_changed", () => {
+            this.ngZone.run(() => {
+                //get the place result
+                let place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-                    //verify result
-                    if (place.geometry === undefined || place.geometry === null) {
-                        return;
-                    }
+                //verify result
+                if (place.geometry === undefined || place.geometry === null) {
+                    return;
+                }
 
-                    //set latitude, longitude and zoom
-                    this.endereco = place.formatted_address;
-                    this.latitude = place.geometry.location.lat();
-                    this.longitude = place.geometry.location.lng();
-                    this.zoom = 12;
-                });
+                //set latitude, longitude and zoom
+                this.endereco = place.formatted_address;
+                this.latitude = place.geometry.location.lat();
+                this.longitude = place.geometry.location.lng();
+                this.zoom = 12;
             });
         });
-    }
+    });
+}
+
     goToNovoevento2(params) {
         if (!params) params = {};
         this.navCtrl.push(Novoevento2Page);

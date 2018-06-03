@@ -1,4 +1,4 @@
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { MapProxPage } from '../Map-prox/Map-prox';
@@ -16,6 +16,7 @@ import {
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'Firebase';
 import { Observable } from 'rxjs/Observable';
+import { MeuseventosPage } from '../meuseventos/meuseventos';
 
 
 /*export class Lista {//para cadastrar
@@ -32,7 +33,7 @@ export class Listar {//para cadastrar
   lng: number;
   toppings: string;
   timeStart: string;
-  timeEnds: string;
+  dayEnds: string;
   month: string;
   description: string;
   event: string;
@@ -58,7 +59,7 @@ export class Novoevento2Page {
   public example: string;
 
   constructor(private database: AngularFireDatabase, public navCtrl: NavController,
-    private _myService: myService, public afauth: AngularFireAuth) {
+    private _myService: myService, public afauth: AngularFireAuth, private toast: ToastController) {
     console.log(this._myService.getData());
     console.log(this._myService.getDatalat());
     console.log(this._myService.getDatalon());
@@ -79,7 +80,7 @@ export class Novoevento2Page {
     console.log(newAlbum);
 
 }*/
-  ionViewWillLoad() {
+ionViewWillEnter() {
     this.afauth.authState.subscribe(data => console.log(data)
     );
 
@@ -95,8 +96,8 @@ export class Novoevento2Page {
   }
   cadastrar() {//para cadastrar
     this.listas.push(this.lista).then(() => {
-      //  this.lista = new Lista();
-      console.log(this.lista);
+      this.toast.create({ message: 'Salvo com sucesso.', duration: 3000 }).present();
+      this.navCtrl.push(MeuseventosPage);
     });
   }
 

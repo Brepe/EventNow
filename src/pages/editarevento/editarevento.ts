@@ -45,7 +45,7 @@ export class EditareventoPage {
   createForm() {
     this.form = this.formBuilder.group({
       key: [this.contact.$key],
-      timeEnds: [this.contact.timeEnds],
+      dayEnds: [this.contact.dayEnds],
       event: [this.contact.event, Validators.required],
       description: [this.contact.description, Validators.required],
     });

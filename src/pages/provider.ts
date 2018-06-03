@@ -23,7 +23,7 @@ export class ProviderProvider {
       if (contact.key) {
         console.log("eba");
         this.db.list(this.PATH)
-          .update(contact.key, { event: contact.event, description: contact.description, timeEnds: contact.timeEnds })
+          .update(contact.key, { event: contact.event, description: contact.description, dayEnds: contact.dayEnds })
           .then(() => resolve())
           .catch((e) => reject(e));
       } else {
