@@ -1,16 +1,27 @@
     .ios, .md{
         Map-prox-page {
 
-
-            .scroll{
-                height: 150%;
-            }
-    
-            #map{
+           #map{
+                
                 width: 100%;
                 height: 90%;
 
             }
+            table {
+                border-collapse: collapse;
+                border: 1px solid #d3d8f2;
+                background:#edeef2;
+            }
+            // para personalizar cor da infowindow deixei ela transparente primeirp
+            .gm-style div div div div div div div  {
+                background-color: rgba(35, 35, 53, 0)!important;
+             }
+             .gm-style .gm-style-iw  {
+                background-color: rgba(35, 35, 53, 0.618)!important;
+                padding: 6px;
+                border-radius: 4%;
+                color: rgb(225, 225, 225); 
+             }
 
         }
     }

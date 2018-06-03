@@ -14,7 +14,7 @@
         </ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Map-prox</ion-title>
+    <ion-title >Eventos agora</ion-title>
   </ion-navbar>
 
 </ion-header> 
@@ -23,9 +23,7 @@
 <!-- precisa dos dois para aparecer o mapa. PQ? N sei.
 A api do maps está em index html. O código está em home.ts
 o css em home.css e variables.css  -->
-
-  <div *ngIf="use | async; else elseBlock" #map id="map"> </div>
-  <table>
+<table >    
     <tr>
       <th><span style="font-size:3vw">Evento cultural</span><img style="width: 20px; height: 27px;" src="assets/img/cult.png"></th>
       <th><span style="font-size:3vw">Festa</span><img style="width: 20px; height: 27px;" src="assets/img/party.png"></th>
@@ -36,6 +34,9 @@ o css em home.css e variables.css  -->
   
     </tr>
   </table>
+  <div *ngIf="use | async; else elseBlock" #map id="map"> </div>
+  
+
   <ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
 
 </ion-content>
