@@ -4,18 +4,13 @@ page-home {
     // background-color: rgb(0, 0, 0);
     width: 100% !important;
     height: 100%  !important;
-    background-position: center !important;
-    background-repeat: repeat !important;
-    background-size: cover !important;
     padding: 5%;
-     margin: 0px 0px 0px 0px;
+    //  margin: 0px 0px 0px 0px;
     }
-    p{
-        // background-color: rgba(255, 255, 255, 0.097)!important;
-        border-radius: 2%;
-        padding: 2%;
-        color:#000000;
 
+    ion-slides{
+        width: 100% !important;
+        height: 70%  !important;
     }
 }
 

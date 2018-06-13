@@ -1,46 +1,83 @@
 <ion-header>
   <ion-navbar>
 
-
-    <ion-buttons start>
+    <ion-buttons *ngIf="use | async" start>
       <button ion-button icon-only menuToggle>
-        <ion-icon name="menu">
-          <!--para menu aparecer no cantinho-->
-        </ion-icon>
+        <div>
+
+          <ion-icon name="menu">
+            <!--para menu aparecer no cantinho-->
+          </ion-icon>
+        </div>
+
       </button>
     </ion-buttons>
-
-    <ion-title> Bem vindo aos Eventos
+    <ion-title> EventNow
 
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page1">
   <div class="bg" *ngIf="use | async; else elseBlock">
-    <!-- <ion-item text-wrap> -->
-    <p>
-      Encontre rapidamente os melhores eventos acontecendo próximos a você no mapa. Veja a lista dos eventos que acontecerão.
-      Você também pode criar seus próprios eventos, ver avaliações e avaliar eventos em tempo real.
-    </p>
-    <p>Acha que está faltando festas perto de você? Ou eventos culturais? Aqui é possível sugerir a organizadores qual tipo 
-      você está interessado, e detalhes como melhor dia, público e preço.</p>
-    <br>
+    <ion-slides pager>
+
+      <ion-slide>
+        <p text-justify>
+          <ion-icon name="beer" color="yel"></ion-icon>
+          Encontre rapidamente os melhores eventos acontecendo próximos a você no mapa. </p>
+        <p text-justify>
+
+          <ion-icon name="calendar" color="blu"></ion-icon>
+
+          Veja a lista dos eventos que acontecerão. </p>
+        <p text-justify>
+
+          <ion-icon name="contacts" color="roxo"></ion-icon>
+
+          Você também pode criar seus próprios eventos, ver avaliações e avaliar eventos em tempo real.
+        </p>
+      </ion-slide>
+      <ion-slide>
+        <p text-justify>
+          <ion-icon name="musical-note" color="roxo"></ion-icon>
+          <ion-icon name="brush" color="blu"></ion-icon>
+          Está faltando festas perto de você? Ou eventos culturais? Aqui é possível sugerir a organizadores qual tipo você está interessado,
+          e detalhes como melhor dia, público e preço.</p>
+      </ion-slide>
+    </ion-slides>
     <button id="Home-button9" ion-button color="balanced" block on-click="logout()">
       Sair </button>
-    <!-- </ion-item> -->
-
 
   </div>
 
   <ng-template #elseBlock>
     <div class="bg">
-        <p>
-            Encontre rapidamente os melhores eventos acontecendo próximos a você no mapa. Veja a lista dos eventos que acontecerão.
+      <ion-slides pager>
+
+        <ion-slide>
+          <p text-justify>
+            <ion-icon name="beer" color="yel"></ion-icon>
+            Encontre rapidamente os melhores eventos acontecendo próximos a você no mapa. </p>
+          <p text-justify>
+
+            <ion-icon name="calendar" color="blu"></ion-icon>
+
+            Veja a lista dos eventos que acontecerão. </p>
+          <p text-justify>
+
+            <ion-icon name="contacts" color="roxo"></ion-icon>
+
             Você também pode criar seus próprios eventos, ver avaliações e avaliar eventos em tempo real.
           </p>
-          <p>Acha que está faltando festas perto de você? Ou eventos culturais? Aqui é possível sugerir a organizadores qual tipo 
-            você está interessado, e detalhes como melhor dia, público e preço.</p>
-          <br>
+        </ion-slide>
+        <ion-slide>
+          <p text-justify>
+            <ion-icon name="musical-note" color="roxo"></ion-icon>
+            <ion-icon name="brush" color="blu"></ion-icon>
+            Está faltando festas perto de você? Ou eventos culturais? Aqui é possível sugerir a organizadores qual tipo você está interessado,
+            e detalhes como melhor dia, público e preço.</p>
+        </ion-slide>
+      </ion-slides>
 
       <form id="Home-form1">
         <ion-item id="Home-input2">
@@ -50,7 +87,7 @@
         </ion-item>
         <ion-item id="Home-input3">
 
-          <ion-input type="text" name="pass" [(ngModel)]="usuario.password" placeholder="Insira sua senha"></ion-input>
+          <ion-input type="password" name="pass" [(ngModel)]="usuario.password" placeholder="Insira sua senha"></ion-input>
         </ion-item>
       </form>
       <ion-row>
