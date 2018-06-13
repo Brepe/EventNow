@@ -86,6 +86,10 @@ export class HomePage {
       console.error(e);
     }
   }
+  goToCadastro(){
+    this.navCtrl.setRoot(CadastroPage);
+
+  }
 
 
 }
