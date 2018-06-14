@@ -1,11 +1,11 @@
 import { Component, Injectable } from '@angular/core';
-import { NavController, NavParams,ToastController  } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 //import { MapProxPagePage } from '../Map-prox/Map-prox';
 
 import { Novoevento2Page } from '../novoevento2/novoevento2';
 import { listaProxPage } from '../lista-prox/lista-prox';
-import {  AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireDatabaseModule } from "angularfire2/database";
 import {
   AngularFireDatabase,
   FirebaseObjectObservable,
@@ -19,10 +19,12 @@ import { MapProxPage } from '../Map-prox/Map-prox';
 import { SugerirPage } from '../sugerir/sugerir';
 import { SugestoesPage } from '../sugestoes/sugestoes';
 import { Userclass } from '../../app/providers/user';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';  //<<<<por causa do erro do ngmodule nos cadastros
-import { CommonModule } from '@angular/common'; //<<<<por causa do erro do ngmodule nos cadastros
+import { FormBuilder , FormGroup, Validators} from '@angular/forms';
+import { ProviderProvider } from '../provider';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';  //<<<<por causa do erro do ngmodule nos cadastros
+// import { CommonModule } from '@angular/common'; //<<<<por causa do erro do ngmodule nos cadastros
 
-export class User1{//para cadastrar
+export class User1 {//para cadastrar
   id: string;
   login: string;
   password: string;
@@ -37,68 +39,89 @@ export class CadastroPage {
   use = {} as Userclass;
 
   user: User1; //para cadastrar
-  usuario:FirebaseListObservable<any[]>;//para exibir e cadastrar
-  
-  //public feeds: Array<string>;
-  //private url: string = "https://www.reddit.com/new.json"; 
-  constructor(private toastCtrl: ToastController, 
-    public afauth: AngularFireAuth,
-    public db: AngularFireDatabase, 
-    public af: AngularFireModule,public navCtrl: NavController, 
-    public navParams: NavParams,  public http: Http) {
-   this.usuario = this.db.list('/usuario');//para exibir e cadastrar
-   this.use = new User1();//para cadastrar
-}
-ngOnInit() {
-  this.use = {} as Userclass;
-}
-async cadastrar(use: Userclass){//para cadastrar
+  usuario: FirebaseListObservable<any[]>;//para exibir e cadastrar
 
-  try{
-  const result = await this.afauth.auth.createUserAndRetrieveDataWithEmailAndPassword(use.email, use.password);
-  console.log(result);
+  form: FormGroup;
+  people: any;
 
-  this.usuario.push(this.use).then(() => {
-    this.use = new User1();
+  constructor(private toastCtrl: ToastController, public afauth: AngularFireAuth,private toast: ToastController,
+    public db: AngularFireDatabase, public af: AngularFireModule, public navCtrl: NavController,private alertCtrl: AlertController,
+    public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private provider: ProviderProvider) {
 
-  });
-  this.presentToast();
-  }catch(e){
-  console.log(e);
+    this.usuario = this.db.list('/usuario');//para exibir e cadastrar
+    this.use = new User1();//para cadastrar
+
+    this.people = this.navParams.data.contact || {};
+    this.createForm();
   }
-}
 
-presentToast() {
-  let toast = this.toastCtrl.create({
-    message: 'Usuário foi adicionado',
-    duration: 3000,
-    position: 'top'
-  });
+  ngOnInit() {
+    this.use = {} as Userclass;
+  }
 
-  toast.onDidDismiss(() => {
-    console.log('Dismissed toast');
-  });
+  createForm() {
+    this.form = this.formBuilder.group({
+      key: [this.people.$key],
+      email: [this.people.email, Validators.required],
+      password: [this.people.password, Validators.required],
+      displayName: [this.people.displayName, Validators.required],
 
-  toast.present();
-}
+    });
+  }
+  onSubmit() {
+    if (this.form.valid) {
+      this.provider.savePeople(this.form.value)
+        .then(() => {
+          
+          this.presentToast();
 
-goToMapProxPage(params){
-  if (!params) params = {};
-this.navCtrl.push(MapProxPage);
-}goToHome(params){
-  if (!params) params = {};
-  this.navCtrl.push(HomePage);
-}goTolistaProx(params){
-  if (!params) params = {};
-  this.navCtrl.push(listaProxPage);
-}goToCadastro(params){
-  if (!params) params = {};
-  this.navCtrl.push(CadastroPage);
-}goToSugerir(params){
-  if (!params) params = {};
-  this.navCtrl.push(SugerirPage);
-}goToSugestoes(params){
-  if (!params) params = {};
-  this.navCtrl.push(SugestoesPage);
+          this.navCtrl.setRoot(HomePage);
+        })
+        .catch((e) => {
+          let alert = this.alertCtrl.create({
+            title: 'Erro! Tente novamente.',
+            buttons: ['OK']
+          });
+          alert.present();           
+          console.log(e);
+
+        })
+    }
+  }
+
+  async cadastrar(use: Userclass) {//para cadastrar
+
+    try {
+      
+      const result = await this.afauth.auth.createUserAndRetrieveDataWithEmailAndPassword(use.email, use.password);
+      console.log(result);
+      if (result){
+      // this.usuario.push(this.use).then(() => {
+      //   this.use = new User1();
+      // });
+      this.onSubmit();
+    }
+    } catch (e) {
+      let alert = this.alertCtrl.create({
+        title: 'Digite corretamente o e-mail.',
+        buttons: ['OK']
+      });
+      alert.present();      
+      console.log(e);
+    }
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Usuário foi criado. Logado!',
+      duration: 5000,
+      position: 'middle',
+      showCloseButton: true,
+      closeButtonText: 'x'
+    });
+   toast.present();
+  }
+goToHome(){
+    this.navCtrl.setRoot(HomePage);
 }
 }

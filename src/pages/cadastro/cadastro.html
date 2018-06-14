@@ -1,58 +1,60 @@
 <ion-header>
   <ion-navbar>
 
-    <ion-buttons start>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu">
-          <!--para menu aparecer no cantinho-->
-        </ion-icon>
-      </button>
-    </ion-buttons>
-
-    <ion-title>
+   <ion-title>
       Cadastro
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page4" ng-controller="ExhibitionTabCtrl">
-    <form id="Home-form1">
-        <ion-item id="Home-input2">
-          <ion-label>
-            Insira seu e-mail
-          </ion-label>
-          <ion-input type="text" name= "email" [(ngModel)]="use.email" placeholder=""></ion-input>
-    
-        </ion-item>
-        <ion-item id="Home-input3">
-          <ion-label>
-            Insira uma senha
-          </ion-label>
-          <ion-input type="text"name= "pass" [(ngModel)]="use.password" placeholder=""></ion-input>
-        </ion-item>
-        <ion-item id="Home-input4">
-            <ion-label>
-              Insira seu nome
-            </ion-label>
-            <ion-input type="text"name= "nome" [(ngModel)]="use.displayName" placeholder=""></ion-input>
-          </ion-item>
-      </form>
-  <!-- <button ion-button (click)="cadastrar()">Cadastrar</button> -->
+  <form [formGroup]="form">
+      <ion-item id="Home-input4">
 
-  <button id="cadastro-button9" ion-button color="balanced" block on-click="cadastrar(use)">
+          <ion-input type="text" formControlName="displayName" name="nome" [(ngModel)]="use.displayName" placeholder="Insira seu nome"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!form.controls.displayName.valid && (form.controls.displayName.dirty || form.controls.displayName.touched)" color="danger">
+          <div [hidden]="!form.controls.displayName.errors.required">
+            O campo é obrigatório
+          </div>
+        </ion-item>
+
+    <ion-item id="Home-input2">
+
+      <ion-input type="email" formControlName="email" name="email" [(ngModel)]="use.email" placeholder="Insira seu e-mail"></ion-input>/
+    </ion-item>
+    <ion-item *ngIf="!form.controls.email.valid && (form.controls.email.dirty || form.controls.email.touched)" color="danger">
+      <div [hidden]="!form.controls.email.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
+
+    <ion-item id="Home-input3">
+
+      <ion-input required minlength="6" type="password" formControlName="password" name="pass" [(ngModel)]="use.password" placeholder="Crie uma senha"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!form.controls.password.valid && (form.controls.password.dirty || form.controls.password.touched)" color="yel">
+      Mínimo 6 caracteres.
+      <!-- <div [hidden]="!form.controls.password.errors.required">
+        O campo é obrigatório
+      </div> -->
+    </ion-item>
+
+
+  </form>
+
+  <button id="cadastro-button9" [disabled]="!form.valid" ion-button color="balanced" block on-click="cadastrar(use)">
     Salvar
   </button>
   <button id="cadastro-button11" ion-button color="balanced" block on-click="goToHome()">
     Voltar
   </button>
 
-  <ion-list>
+  <!-- <ion-list>
     <ion-item *ngFor="let user of usuario | async">
       <h2>{{user.displayName}}</h2>
       <h3>{{user.email}}</h3>
-      <!--ion-note item-right *ngIf="user.teste == 'true'">
-         Vdd
-       </ion-note-->
+
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
 </ion-content>

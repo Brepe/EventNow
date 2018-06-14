@@ -22,7 +22,15 @@ import { MeuseventosPage } from '../pages/meuseventos/meuseventos';
 import { EditareventoPage } from '../pages/editarevento/editarevento';
 
 
-
+// const config = {
+//   apiKey: "AIzaSyDvXaxJqvlH_84DrxytYNF341Ax67H1OU8",
+//   authDomain: "geoloc-179420.firebaseapp.com",
+//   databaseURL: "https://geoloc-179420.firebaseio.com",
+//   projectId: "geoloc-179420",
+//   storageBucket: "geoloc-179420.appspot.com",
+//   messagingSenderId: "241352714682"
+// };
+declare var google: any;
 @Component({
   templateUrl: 'app.html'
 })
@@ -37,13 +45,13 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Cadastro', component: CadastroPage },
       { title: 'Novo evento', component: NovoeventoPage },
+      { title: 'Meus eventos', component: MeuseventosPage },
       { title: 'Mapear eventos', component: MapProxPage },
-      { title: 'Listar eventos', component: listaProxPage },
+      { title: 'Próximos eventos', component: listaProxPage },
       { title: 'Sugerir', component: SugerirPage },
       { title: 'Sugestões', component: SugestoesPage },
-      { title: 'Meus eventos', component: MeuseventosPage },
+
     ];
 
 
@@ -54,6 +62,8 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    // firebase.initializeApp(config);
+
   }
 
   openPage(page) {

@@ -49,9 +49,6 @@ import { MeuseventosPage } from '../pages/meuseventos/meuseventos';
 import { EditareventoPage } from '../pages/editarevento/editarevento';
 import { ProviderProvider } from '../pages/provider';
 
-
-
-
 var config = {
   apiKey: "AIzaSyDvXaxJqvlH_84DrxytYNF341Ax67H1OU8",
   authDomain: "geoloc-179420.firebaseapp.com",
@@ -60,6 +57,7 @@ var config = {
   storageBucket: "geoloc-179420.appspot.com",
   messagingSenderId: "241352714682"
 };
+
 
 firebase.initializeApp(config);
 
