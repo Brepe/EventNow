@@ -89,7 +89,7 @@ firebase.initializeApp(config);
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyDvXaxJqvlH_84DrxytYNF341Ax67H1OU8",
+      apiKey: "key",
       libraries: ["places"]
     })
   ],
