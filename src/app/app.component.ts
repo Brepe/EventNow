@@ -23,12 +23,12 @@ import { EditareventoPage } from '../pages/editarevento/editarevento';
 
 
 // const config = {
-//   apiKey: "AIzaSyDvXaxJqvlH_84DrxytYNF341Ax67H1OU8",
-//   authDomain: "geoloc-179420.firebaseapp.com",
-//   databaseURL: "https://geoloc-179420.firebaseio.com",
-//   projectId: "geoloc-179420",
-//   storageBucket: "geoloc-179420.appspot.com",
-//   messagingSenderId: "241352714682"
+//   apiKey: "mykey",
+//   authDomain: "geoloc-----.firebaseapp.com",
+//   databaseURL: "https://geoloc-----.firebaseio.com",
+//   projectId: "geoloc----",
+//   storageBucket: "geoloc----.appspot.com",
+//   messagingSenderId: "ididid"
 // };
 declare var google: any;
 @Component({
