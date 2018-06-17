@@ -19,24 +19,25 @@
 
 </ion-header> 
 
-<ion-content padding>
+<ion-content >
 <!-- precisa dos dois para aparecer o mapa. PQ? N sei.
 A api do maps está em index html. O código está em home.ts
 o css em home.css e variables.css  -->
-<table >    
-    <tr>
-      <th><span style="font-size:3vw">Evento cultural</span><img style="width: 20px; height: 27px;" src="assets/img/cult.png"></th>
-      <th><span style="font-size:3vw">Festa</span><img style="width: 20px; height: 27px;" src="assets/img/party.png"></th>
-      <th><span style="font-size:3vw">Show</span><img style="width: 20px; height: 27px;" src="assets/img/show.png"></th>
-      <th><span style="font-size:3vw">Praia</span><img style="width: 20px; height: 27px;" src="assets/img/beach.png"></th>
-      <th><span style="font-size:3vw">Feira</span><img style="width: 20px; height: 27px;" src="assets/img/feira.png"></th>
-      <th><span style="font-size:3vw">Outros</span><img style="width: 20px; height: 27px;" src="assets/img/other.png"></th>
-  
-    </tr>
-  </table>
-  <div *ngIf="use | async; else elseBlock" #map id="map"> </div>
-  
 
-  <ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
+  <ion-fab top right >
+      <button ion-fab mini><ion-icon name="pin"></ion-icon></button>
+      <ion-fab-list>
+        Feira<img style="width: 20px; height: 27px;" src="/assets/img/feira.png">
+        Show<img style="width: 20px; height: 27px;" src="/assets/img/show.png">    
+        Praia<img style="width: 20px; height: 27px;" src="/assets/img/beach.png">  
+        Festa<img style="width: 20px; height: 27px;" src="/assets/img/party.png">  
+        Outros<img style="width: 20px; height: 27px;" src="/assets/img/other.png"> 
+        Evento <br>cultural<img style="width: 20px; height: 27px;" src="/assets/img/cult.png">
+
+      </ion-fab-list>
+    </ion-fab>    <div *ngIf="use | async; else elseBlock" #map id="map"> </div>
+
+
+<ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
 
 </ion-content>

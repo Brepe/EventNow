@@ -1,20 +1,18 @@
 import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation'; //plugin nativo cordova instalado via npm 
 import { AngularFireDatabase } from 'angularfire2/database';
-import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { DetalheseventoPage } from '../detalhesevento/detalhesevento';
 import * as firebase from 'Firebase';
-import { Device } from '@ionic-native/device';
+// import { Device } from '@ionic-native/device';
 import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
   LatLng,
-  CameraPosition,
   MarkerOptions
 } from '@ionic-native/google-maps';
-import { HomePage } from '../home/home';
 import { myService } from '../services/data.service';
 import { Profile } from '../../app/providers/profile';
 import { Observable } from 'rxjs/Observable';
@@ -45,7 +43,7 @@ export class MapProxPage {
   ref = firebase.database().ref('eventos/');  //ref do bd pra buscar as latlng
   initialMapLoad: boolean = true; //para recarregar o map toda vez q abrir, e mostrar os markers
 
-  constructor(private _myService: myService, public platform: Platform, private device: Device, public db: AngularFireDatabase,
+  constructor(public platform: Platform,  public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
     private googleMaps: GoogleMaps, public zone: NgZone, public afauth: AngularFireAuth) {
 
@@ -106,19 +104,19 @@ export class MapProxPage {
         let image;
         
         if (top=="Festa"){
-          image = 'assets/img/party.png';
+          image = '/assets/img/party.png';
         } else if (top=="Feira"){
-          image = 'assets/img/feira.png';
+          image = '/assets/img/feira.png';
         } else if (top=="Praia"){
-          image = 'assets/img/beach.png';
+          image = '/assets/img/beach.png';
         } else if (top=="Show"){
-          image = 'assets/img/show.png';
+          image = '/assets/img/show.png';
         } else if (top=="Evento cultural"){
-          image = 'assets/img/cult.png';
+          image = '/assets/img/cult.png';
         } else if (top=="Outros"){
-          image = 'assets/img/other.png';
+          image = '/assets/img/other.png';
         } else{
-          image = 'assets/img/err.png';
+          image = '/assets/img/err.png';
         }
         
         let updatelocation = new google.maps.LatLng(lat, lng);
@@ -177,7 +175,7 @@ export class MapProxPage {
 
   GoDetail = (idk: any) => {
     this.zone.run(() => { //Navigate To New Page 
-      this.navCtrl.push(DetalheseventoPage, { idk });
+      this.navCtrl.setRoot(DetalheseventoPage, { idk });
     });
   }
 

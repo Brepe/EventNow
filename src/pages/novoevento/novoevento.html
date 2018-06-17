@@ -1,17 +1,17 @@
 <ion-header>
-  <ion-buttons start>
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu">
-        <!--para menu aparecer no cantinho-->
-      </ion-icon>
-    </button>
-  </ion-buttons>
-  <ion-navbar color="app">
-    <ion-title>
-      Novo evento
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+
+    <ion-navbar>
+      <ion-buttons start>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu">
+            <!--para menu aparecer no cantinho-->
+          </ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title >Novo Evento</ion-title>
+    </ion-navbar>
+  
+  </ion-header> 
 
 <ion-content padding>
   <div *ngIf="use | async; else elseBlock">
@@ -23,8 +23,7 @@
     </ion-item>
 
     <ion-item text-wrap>
-      <!-- <span style="font-size:4vw">Endereço escolhido:</span>
-      <br> -->{{endereco}} 
+      {{endereco}} 
       </ion-item>
   </ion-list>
     <div class="hid">
@@ -32,9 +31,10 @@
       <ion-input id="mylat" #mylat type="text" [(ngModel)]="latitude"></ion-input>
       <ion-input id="mylon" #mylon type="text" [(ngModel)]="longitude"></ion-input>
     </div>
-
     <br>
-    <button ion-button (click)="this._myService.setData(endereco,mylat.value,mylon.value);goToNovoevento2(); adressdata = endereco; latdata=mylat.value; londata=mylon.value;">Continuar</button>
+    <div>
+    <button [disabled]="!mylat.value"  ion-button (click)="this._myService.setData(endereco,mylat.value,mylon.value);goToNovoevento2(); adressdata = endereco; latdata=mylat.value; londata=mylon.value;">Continuar</button>
+      </div>
 
   </div>
 

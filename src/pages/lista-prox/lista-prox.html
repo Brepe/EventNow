@@ -17,7 +17,26 @@
 </ion-header>
 
 <ion-content padding>
-  Vazio
+    <div *ngIf="use | async; else elseBlock">
+  <button ion-button (click)="show()" ><ion-icon name="arrow-dropdown" ></ion-icon> Mostrar eventos com descrição</button>
+
+  <ion-item-sliding  *ngFor="let item of filteredItems" text-wrap>
+    <ion-item >
+        <ion-icon name="calendar" color="blu"> </ion-icon> <h2> {{item.event}}</h2>
+      <!-- <h4>{{item.description}}</h4> -->
+      <h4>Início: {{item.month}} ({{item.timeStarts}}h)</h4>
+      <h4>Término: {{item.dayEnds}} ({{item.timeEnds}}h)</h4>
+
+      <h4>Tipo: {{item.toppings}}</h4>
+      <h4>Local: {{item.endereco}}</h4>
+      <div *ngIf="showMe">  
+        <h4><b>Descrição:</b> {{item.description}}</h4>
+
+      </div>
+    </ion-item>
+  </ion-item-sliding>  </div>
+  <ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
+
 </ion-content>
 
 

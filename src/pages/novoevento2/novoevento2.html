@@ -14,30 +14,45 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page5">
+<ion-content padding>
 
-  <ion-list>
+    <form [formGroup]="form">
+
     <!-- <div style="float:left; clear:both;"> -->
-      <ion-item id="input1">
-        <ion-label stacked>Nome do evento</ion-label>
-        <ion-input type="text" [(ngModel)]="lista.event" name="event" placeholder=""></ion-input>
-      </ion-item>
-      <ion-item id="input2">
-        <ion-label stacked>Descrição</ion-label>
+    <ion-item >
+      <ion-label stacked>Nome do evento</ion-label>
+      <ion-input type="text" formControlName="event" name="event" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!form.controls.event.valid && (form.controls.event.dirty || form.controls.event.touched)" color="danger">
+      <div [hidden]="!form.controls.event.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
+    <ion-item >
 
-        <ion-textarea type="text" [(ngModel)]="lista.description" name="description" placeholder="" rows="2" maxLength="500"></ion-textarea>
+      <ion-label stacked>Descrição</ion-label>
+      <ion-textarea type="text" formControlName="description" name="description" placeholder="" rows="2" maxLength="500"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="!form.controls.description.valid && (form.controls.description.dirty || form.controls.description.touched)"
+      color="danger">
+      <div [hidden]="!form.controls.description.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
 
-      </ion-item>
-      <ion-item id="input3">
-        <ion-label stacked>Endereço</ion-label>
-        <!-- <ion-input type="text" [(ngModel)]="lista.endereco" name="endereco" value="{{_myService.getData()}}"></ion-input> -->
-        <ion-textarea readonly type="text" [(ngModel)]="lista.endereco" name="endereco" value="{{_myService.getData()}}" rows="2" maxLength="500"></ion-textarea>
+    <ion-item >
+      <ion-label stacked>Endereço</ion-label>
+      <ion-textarea readonly type="text" formControlName="endereco" name="endereco" value="{{_myService.getData()}}" rows="2" maxLength="500"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="!form.controls.endereco.valid && (form.controls.endereco.dirty || form.controls.endereco.touched)" color="danger">
+      <div [hidden]="!form.controls.endereco.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
 
-      </ion-item>
-    <!-- </div> -->
     <ion-item>
       <ion-label stacked>Tipo</ion-label>
-      <ion-select [(ngModel)]="lista.toppings" multiple="false">
+      <ion-select formControlName="toppings" multiple="false">
         <ion-option>Evento cultural</ion-option>
         <ion-option>Praia</ion-option>
         <ion-option>Show</ion-option>
@@ -46,54 +61,84 @@
         <ion-option>Outros</ion-option>
       </ion-select>
     </ion-item>
+    <ion-item *ngIf="!form.controls.toppings.valid && (form.controls.toppings.dirty || form.controls.toppings.touched)" color="danger">
+      <div [hidden]="!form.controls.toppings.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
+
     <ion-item>
       <ion-label stacked>Classificação etária</ion-label>
-      <ion-select [(ngModel)]="lista.etaria" multiple="false">
-        <ion-option>18</ion-option>
-        <ion-option>16</ion-option>
-        <ion-option>14</ion-option>
-        <ion-option>12</ion-option>
+      <ion-select formControlName="etaria" multiple="false">
+        <ion-option>+18</ion-option>
+        <ion-option>+16</ion-option>
+        <ion-option>+14</ion-option>
+        <ion-option>+12</ion-option>
         <ion-option>Livre</ion-option>
       </ion-select>
     </ion-item>
-
+    <ion-item *ngIf="!form.controls.etaria.valid && (form.controls.etaria.dirty || form.controls.etaria.touched)" color="danger">
+      <div [hidden]="!form.controls.etaria.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
 
     <ion-item>
       <ion-label stacked>Início</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="lista.month"></ion-datetime>
+      <ion-datetime displayFormat="MMM DD YYYY" formControlName="month"></ion-datetime>
     </ion-item>
-
+    <ion-item *ngIf="!form.controls.month.valid && (form.controls.month.dirty || form.controls.month.touched)" color="danger">
+      <div [hidden]="!form.controls.month.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
 
     <ion-item>
       <ion-label stacked>Hora Início</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="lista.timeStarts"></ion-datetime>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="timeStarts"></ion-datetime>
     </ion-item>
-  
+    <ion-item *ngIf="!form.controls.timeStarts.valid && (form.controls.timeStarts.dirty || form.controls.timeStarts.touched)"
+      color="danger">
+      <div [hidden]="!form.controls.timeStarts.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
 
     <ion-item>
       <ion-label stacked>Término</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="lista.dayEnds"></ion-datetime>
+      <ion-datetime displayFormat="MMM DD YYYY" formControlName="dayEnds"></ion-datetime>
     </ion-item>
+    <ion-item *ngIf="!form.controls.dayEnds.valid && (form.controls.dayEnds.dirty || form.controls.dayEnds.touched)" color="danger">
+      <div [hidden]="!form.controls.dayEnds.errors.required">
+        O campo é obrigatório
+      </div>
+    </ion-item>
+
     <ion-item>
       <ion-label stacked>Hora Término</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="lista.timeEnds"></ion-datetime>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="timeEnds"></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf="!form.controls.timeEnds.valid && (form.controls.timeEnds.dirty || form.controls.timeEnds.touched)" color="danger">
+      <div [hidden]="!form.controls.timeEnds.errors.required">
+        O campo é obrigatório
+      </div>
     </ion-item>
 
     <div class="hid">
       <ion-item id="input4">
-        <ion-input type="number" [(ngModel)]="lista.lat" name="lat" value={{_myService.getDatalat()}}></ion-input>
+        <ion-input type="number" formControlName="lat" name="lat" value={{_myService.getDatalat()}}></ion-input>
       </ion-item>
       <ion-item id="input5">
-        <ion-input type="number" [(ngModel)]="lista.lng" name="lng" value={{_myService.getDatalon()}}></ion-input>
+        <ion-input type="number" formControlName="lng" name="lng" value={{_myService.getDatalon()}}></ion-input>
       </ion-item>
       <ion-item id="input6">
-        <ion-input type="text" [(ngModel)]="lista.authid" name="auth" value={{authid}}></ion-input>
+        <ion-input type="text" formControlName="authid" name="auth" value={{authid}}></ion-input>
       </ion-item>
     </div>
-  </ion-list>
 
-  <button id="novoevento2-button13" ion-button color="balanced" block on-click="cadastrar()">
-    Salvar
-  </button>
+    <button button ion-button block [disabled]="!form.valid" type="submit" ion-button color="balanced" block (click)="onSubmit()">
+      Salvar
+    </button>
+  </form>
 
 </ion-content>

@@ -9,11 +9,10 @@ import { SugestoesPage } from '../sugestoes/sugestoes';
 //import { AngularFireList } from 'angularfire2/database';
 import {
   AngularFireDatabase,
-  FirebaseObjectObservable,
   FirebaseListObservable
 } from 'angularfire2/database-deprecated';
 import { Observable } from 'rxjs/Observable'; //para o auth firebase ngif
-import { AngularFireAuthModule, AngularFireAuth, AUTH_PROVIDERS} from 'angularfire2/auth';
+import {  AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'Firebase';
 
 
@@ -77,7 +76,7 @@ export class SugerirPage {
     this.navCtrl.push(HomePage);
   } goTolistaProx(params) {
     if (!params) params = {};
-    this.navCtrl.push(listaProxPage);
+    this.navCtrl.setRoot(listaProxPage);
   } goToCadastro(params) {
     if (!params) params = {};
     this.navCtrl.push(CadastroPage);

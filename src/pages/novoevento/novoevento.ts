@@ -1,9 +1,9 @@
 import { NavController } from 'ionic-angular';
-import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, ElementRef, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from "@angular/forms";
-import { } from 'googlemaps';
-//import {} from '@types/googlemaps';
+import { } from 'google-maps';
+// import { } from '@types/googlemaps';
 import { AngularFireList } from 'angularfire2/database';
 import {
     AngularFireDatabase,
@@ -12,7 +12,6 @@ import {
 } from 'angularfire2/database-deprecated';
 import { myService } from '../services/data.service';
 
-import { SugerirPage } from '../sugerir/sugerir';
 import { Novoevento2Page } from '../novoevento2/novoevento2';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'Firebase';
@@ -64,7 +63,7 @@ export class NovoeventoPage {
         this.searchControl = new FormControl();
 
         //set current position
-        this.setCurrentPosition();
+        // this.setCurrentPosition();
 
         this.listas = database.list('/listas');
         console.log(this._myService.getData());
@@ -77,6 +76,7 @@ export class NovoeventoPage {
 
 
     }
+    
     ionViewWillLoad(){
         this.afauth.authState.subscribe(data => console.log(data)
       );
@@ -92,14 +92,14 @@ export class NovoeventoPage {
     ionViewDidLoad() {
         //set google maps defaults
         this.zoom = 4;
-        this.latitude = 39.8282;
-        this.longitude = -98.5795;
+        this.latitude = null ;
+        this.longitude = null;
 
         //create search FormControl
         this.searchControl = new FormControl();
 
         //set current position
-        this.setCurrentPosition();
+        // this.setCurrentPosition();
 
         //load Places Autocomplete
         this.loadplaces();
@@ -166,15 +166,15 @@ loadplaces(){
 
 
 
-    private setCurrentPosition() {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                this.latitude = position.coords.latitude;
-                this.longitude = position.coords.longitude;
-                this.zoom = 12;
-            });
-        }
-    }
+    // private setCurrentPosition() {
+    //     if ("geolocation" in navigator) {
+    //         navigator.geolocation.getCurrentPosition((position) => {
+    //             this.latitude = position.coords.latitude;
+    //             this.longitude = position.coords.longitude;
+    //             this.zoom = 12;
+    //         });
+    //     }
+    // }
 
 }
 

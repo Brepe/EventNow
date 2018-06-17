@@ -1,10 +1,10 @@
-import { Component,Injectable  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'Firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database-deprecated';
-import { key } from 'localforage';
+// import { key } from 'localforage';
 import { ProviderProvider } from '../provider';
 import { EditareventoPage } from '../editarevento/editarevento';
 
@@ -82,14 +82,14 @@ export class MeuseventosPage {
       this.remove(item)
         .then(() => {
           this.getFilteredItems();
-          this.toast.create({ message: 'Contato removido sucesso.', duration: 3000 }).present();
+          this.toast.create({ message: 'Evento removido sucesso.', duration: 3000 }).present();
           
 
           console.log("remove");
 
         })
         .catch(() => {
-          this.toast.create({ message: 'Erro ao remover o contato.', duration: 3000 }).present();
+          this.toast.create({ message: 'Erro ao remover o evento.', duration: 3000 }).present();
         });
     }
   }

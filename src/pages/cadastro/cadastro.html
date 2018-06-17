@@ -6,9 +6,9 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page4" ng-controller="ExhibitionTabCtrl">
-  <form [formGroup]="form">
-      <ion-item id="Home-input4">
+<ion-content class="cor" padding id="page4" ng-controller="ExhibitionTabCtrl">
+  <form  [formGroup]="form">
+      <ion-item class="cor" id="Home-input4">
 
           <ion-input type="text" formControlName="displayName" name="nome" [(ngModel)]="use.displayName" placeholder="Insira seu nome"></ion-input>
         </ion-item>
@@ -18,7 +18,7 @@
           </div>
         </ion-item>
 
-    <ion-item id="Home-input2">
+    <ion-item class="cor" id="Home-input2">
 
       <ion-input type="email" formControlName="email" name="email" [(ngModel)]="use.email" placeholder="Insira seu e-mail"></ion-input>/
     </ion-item>
@@ -28,7 +28,7 @@
       </div>
     </ion-item>
 
-    <ion-item id="Home-input3">
+    <ion-item class="cor" id="Home-input3">
 
       <ion-input required minlength="6" type="password" formControlName="password" name="pass" [(ngModel)]="use.password" placeholder="Crie uma senha"></ion-input>
     </ion-item>

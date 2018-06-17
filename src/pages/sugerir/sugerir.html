@@ -10,16 +10,15 @@
     </ion-buttons>
 
     <ion-title>
-      sugerir
+      Sugerir
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page5">
   <div *ngIf="use | async; else elseBlock">
-    <div id="sugest-markdown7" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">
-
-        {{ (use | async)?.email }} nesta área, você poderá sugerir um evento para organizadores. Essa sugestão aparecerá na lista de sugestões.
+    <div text-justify id="sugest-markdown7" class="show-list-numbers-and-dots">
+      <p style="color:#664577;">
+<ion-icon name="megaphone" color="primary" style="zoom:2.0;" ></ion-icon>         Nesta área você poderá sugerir um evento para organizadores.
       </p>
     </div>
     <form id="sugest-form5">
@@ -79,10 +78,14 @@
     <ion-item>
       <ion-label>Faixa de preço aceitável</ion-label>
       <ion-select [(ngModel)]="sugerirform.valor" name="valor" multiple="true">
+        <ion-option>N/A</ion-option>
         <ion-option>Até R$30</ion-option>
         <ion-option>Entre R$30 e R$100</ion-option>
         <ion-option>Mais de R$100</ion-option>
       </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-textarea type="text" [(ngModel)]="sugerirform.detalhes" name="detalhes" rows="2" maxLength="100" placeholder="Detalhes"></ion-textarea>
     </ion-item>
 
 

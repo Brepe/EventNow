@@ -5,30 +5,61 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  
-    <ion-buttons start>
-        <button ion-button icon-only menuToggle>
-          <ion-icon name="menu"> <!--para menu aparecer no cantinho-->
-          </ion-icon>
-        </button>
-      </ion-buttons>
+
+
 
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu">
+          <!--para menu aparecer no cantinho-->
+        </ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Detalhes</ion-title>
-    
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<h3>Detalhes de: {{event}}</h3><br>
-Descrição: {{description}}<br>
-Endereço: {{endereco}}<br>
-Dia: {{month}}<br>
-Hora inicial: {{timeStarts}}<br>
-Hora final: {{dayEnds}}<br>
-Tipo: {{toppings}}<br>
+  <h2 text-justify >Detalhes de: {{event}}</h2>
+  <br>
+  <ion-item text-wrap>Endereço: {{endereco}}
+    <br> Tipo: {{toppings}}
+    <br> Classificação: {{etaria}}
+    <br> Início: {{month}}
+    <br> Hora início: {{timeStarts}}
+    <br> Término: {{dayEnds}}
+    <br> Hora término: {{timeEnds}}
+    <br>
+  </ion-item>
 
+  <ion-item text-wrap>Descrição: {{description}}</ion-item>
+  <form [formGroup]="form">
 
+  <ion-item>
+    <ion-label stacked>Adicione sua opnião:</ion-label>
+    <ion-textarea type="text" formControlName="comentarios" name="comentarios" rows="2" maxLength="500" placeholder="Ótimo!"></ion-textarea>
+    <div class="hid">
+
+    <ion-textarea readonly type="text" formControlName="key" name="key" rows="2" maxLength="500" value="{{roomkey}}"></ion-textarea>
+</div>
+  </ion-item>
+  <ion-row>
+    <ion-col col-10> .</ion-col>
+    <ion-col col-2>
+      <button ion-button block type="submit" (click)="onSubmit()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</form >
+<ion-item ><h2>Opniões:</h2></ion-item>
+<ion-item-sliding *ngFor="let item of filteredItems" text-wrap>
+    <ion-item text-wrap>
+      <h3><i>"{{item.comentarios}}"</i></h3>
+    </ion-item>
+  </ion-item-sliding>
 </ion-content>

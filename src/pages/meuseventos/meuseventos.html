@@ -19,11 +19,10 @@
 <ion-content padding>
   <div *ngIf="use | async; else elseBlock">
     <ion-item-sliding *ngFor="let item of filteredItems">
-      <ion-item >
-        <h2>{{item.event}}</h2>
-        <h3>{{item.endereco}}</h3>
-        <h3>{{item.toppings}}</h3>
-        {{item.$key}}
+      <ion-item text-wrap>
+        <h2><b>{{item.event}}</b></h2>
+        <h3><b>Endereço:</b> {{item.endereco}}</h3>
+        <h3><b>Data de início:</b> {{item.month}}</h3>
         <button ion-button color="danger" (click)="removeContact(item)">
           <ion-icon name="trash"></ion-icon>
         </button>        
@@ -32,7 +31,6 @@
           </button>
       </ion-item>
     </ion-item-sliding>
-    {{authid}}
   </div>
   <ng-template #elseBlock> Faça login para ter acesso a essa página.</ng-template>
 
