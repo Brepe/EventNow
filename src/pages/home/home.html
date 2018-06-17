@@ -17,8 +17,9 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page1">
+<ion-content class='cor' padding id="page1">
   <div class="bg" *ngIf="use | async; else elseBlock">
+
     <ion-slides pager>
 
       <ion-slide>
@@ -45,8 +46,11 @@
           e detalhes como melhor dia, público e preço.</p>
       </ion-slide>
     </ion-slides>
+
     <button id="Home-button9" ion-button color="balanced" block on-click="logout()">
       Sair </button>
+    <ion-item class='cor' text-center text-wrap>Usuário: {{ (use | async)?.email }}</ion-item>
+
 
   </div>
 
@@ -80,14 +84,14 @@
       </ion-slides>
 
       <form id="Home-form1">
-        <ion-item id="Home-input2">
+        <ion-item class="cor" id="Home-input2">
 
-          <ion-input type="text" name="email" [(ngModel)]="usuario.email" placeholder="Insira seu e-mail"></ion-input>
+          <ion-input class="cor" type="text" name="email" [(ngModel)]="usuario.email" placeholder="Insira seu e-mail"></ion-input>
 
         </ion-item>
-        <ion-item id="Home-input3">
+        <ion-item class="cor" id="Home-input3">
 
-          <ion-input type="password" name="pass" [(ngModel)]="usuario.password" placeholder="Insira sua senha"></ion-input>
+          <ion-input class="cor" type="password" name="pass" [(ngModel)]="usuario.password" placeholder="Insira sua senha"></ion-input>
         </ion-item>
       </form>
       <ion-row>
