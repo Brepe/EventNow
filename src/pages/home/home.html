@@ -47,9 +47,13 @@
       </ion-slide>
     </ion-slides>
 
+
     <button id="Home-button9" ion-button color="balanced" block on-click="logout()">
       Sair </button>
-    <ion-item class='cor' text-center text-wrap>Usuário: {{ (use | async)?.email }}</ion-item>
+    <ion-item-sliding *ngFor="let item of usuariofire |async" text-wrap>
+
+      <ion-item *ngIf="item.email==(use | async)?.email" class='cor' text-center text-wrap> Usuário: {{ item.displayName }} ({{(use | async)?.email}})</ion-item>
+    </ion-item-sliding>
 
 
   </div>

@@ -50,7 +50,7 @@ export class NovoeventoPage {
     listas: FirebaseListObservable<any[]>;//para exibir e cadastrar
 
 
-    @ViewChild('search') public searchElementRef: ElementRef;
+    @ViewChild('myadress') public searchElementRef: ElementRef;
 
     constructor(private _myService: myService, private database: AngularFireDatabase, 
         public navCtrl: NavController, private mapsAPILoader: MapsAPILoader,
@@ -169,6 +169,7 @@ loadplaces(){
     // private setCurrentPosition() {
     //     if ("geolocation" in navigator) {
     //         navigator.geolocation.getCurrentPosition((position) => {
+    //             this.endereco = position[0].formatted_address;
     //             this.latitude = position.coords.latitude;
     //             this.longitude = position.coords.longitude;
     //             this.zoom = 12;

@@ -19,7 +19,7 @@
     <ion-item>
       <ion-label stacked>Digite o endereço
         <br>e escolha uma sugestão:</ion-label>
-      <ion-input id="myadress" #myadress type="text" (click)="loadplaces()" ></ion-input>
+      <ion-input id="myadress" #myadress type="text" (click)="loadplaces()"  (change)="loadplaces()" ></ion-input>
     </ion-item>
 
     <ion-item text-wrap>

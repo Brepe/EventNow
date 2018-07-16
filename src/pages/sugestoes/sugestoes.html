@@ -23,15 +23,15 @@
 <ion-content padding id="page2">
 <div *ngIf="use | async; else elseBlock">
   <ion-list>
-    <ion-item *ngFor="let user of sugestoes | async">
+    <ion-item *ngFor="let user of sugestoes | async" text-wrap>
         <ion-icon name="megaphone" color="primary" style="zoom:1.5;" ></ion-icon>
-      <h2>Tipo: {{user.tipo}}</h2>
-      <h3>Dia/hora: {{user.melhordia}} / {{user.melhorhora}}</h3>
-      <h3>Público: {{user.pub}}</h3>
-      <h3>Cidade: {{user.cidade}}</h3>
+      <h2 >TIPO: {{user.tipo}}</h2>
+      <h3>DIA/HORA: {{user.melhordia}} / {{user.melhorhora}}</h3>
+      <h3  >PÚBLICO: {{user.pub}}</h3>
+      <h3>CIDADE: {{user.cidade}}</h3>
       <h3>UF: {{user.uf}}</h3>
-      <h3>Valor sugerido: {{user.valor}}</h3>
-      <h2>Detalhes: {{user.detalhes}}</h2>
+      <h3 *ngIf="user.valor">VALOR SUGERIDO: {{user.valor}}</h3>
+      <h2 *ngIf="user.detalhes"  >DETALHES: {{user.detalhes}}</h2>
 
       
 

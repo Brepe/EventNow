@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { Userclass } from '../../app/providers/user';
 
 @IonicPage()
 @Component({
@@ -30,17 +31,22 @@ export class DetalheseventoPage {
   form: FormGroup;
   ev: any;
 
+  usuario = {} as Userclass;
 
   use: Observable<firebase.User>; //para o auth firebase ngif
   meventos: FirebaseListObservable<any[]>;//para exibir e cadastrar
+  usuariofire: FirebaseListObservable<any[]>;//para exibir e cadastrar
+
   filteredItems: Array<any> =[];
   contacts: Observable<any>;
 
-  constructor( private formBuilder: FormBuilder, private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
+  constructor( public afauth: AngularFireAuth, private formBuilder: FormBuilder, private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     this.roomkey = this.navParams.get("idk") as string;
+    this.use = afauth.authState; //para o auth firebase ngif
 
     this.ev = this.navParams.data.ev || { };
     this.createForm();
+    this.usuariofire =  this.db.list('/usuario');//para exibir e cadastrar
     this.meventos = this.db.list('/coments');//para exibir e cadastrar
 
     firebase.database().ref('eventos/' + this.roomkey).on('value', snapshot => {
@@ -63,6 +69,22 @@ export class DetalheseventoPage {
     this.getFilteredItems();
 
   }
+
+
+  ionViewWillLoad() {
+
+    this.afauth.authState.subscribe(data => console.log(data)    );
+
+    firebase.auth().onAuthStateChanged(function (use) {
+      if (use) {
+        console.log(" User is signed in.");
+      } else {
+        console.log("No user is signed in.");
+      }
+    });
+  }
+
+
   getFilteredItems() {
     this.filteredItems = [];
     this.meventos.forEach(element => {
@@ -81,6 +103,10 @@ export class DetalheseventoPage {
     this.form = this.formBuilder.group({
       key: [this.ev.$key],
       comentarios: [this.ev.comentarios],
+      user: [this.ev.user],
+      name: [this.ev.name],
+
+
 
     });
   }
@@ -91,7 +117,7 @@ add(ev: any) {
       
           console.log("nou");
           this.db.list('coments/')
-            .push({key: ev.key, comentarios: ev.comentarios })
+            .push({key: ev.key, comentarios: ev.comentarios,user: ev.user, name: ev.name })
             .then(() => resolve());
     
   })

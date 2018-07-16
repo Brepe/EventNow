@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireDatabaseModule, AngularFireDatabase } from "angularfire2/database";
@@ -20,6 +20,7 @@ import { NovoeventoPage } from '../pages/novoevento/novoevento';
 import { DetalheseventoPage } from '../pages/detalhesevento/detalhesevento';
 import { MeuseventosPage } from '../pages/meuseventos/meuseventos';
 import { EditareventoPage } from '../pages/editarevento/editarevento';
+import { Geolocation } from '@ionic-native/geolocation'; //plugin nativo cordova instalado via npm 
 
 
 // const config = {
@@ -41,7 +42,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, menu: MenuController) {
+  constructor(private alertCtrl: AlertController,private geolocation: Geolocation, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, menu: MenuController) {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
@@ -61,6 +62,17 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      let optionsGPS = { timeout: 4000, enableHighAccuracy: true };
+      geolocation.getCurrentPosition(optionsGPS).then((result) => {
+        let gpson = new google.maps.LatLng(result.coords.latitude, result.coords.longitude);
+      }).catch((err) => {
+        let alert = this.alertCtrl.create({
+          title: 'Ative seu GPS',
+          subTitle: '...e reinicie o aplicativo para te localizarmos.',
+          buttons: ['Ok']
+        });
+        alert.present();
+      });
     });
     // firebase.initializeApp(config);
 

@@ -24,42 +24,65 @@
 
 
 <ion-content padding>
-  <h2 text-justify >Detalhes de: {{event}}</h2>
-  <br>
-  <ion-item text-wrap>Endereço: {{endereco}}
-    <br> Tipo: {{toppings}}
-    <br> Classificação: {{etaria}}
-    <br> Início: {{month}}
-    <br> Hora início: {{timeStarts}}
-    <br> Término: {{dayEnds}}
-    <br> Hora término: {{timeEnds}}
+  <div class="bg" *ngIf="use | async; else elseBlock">
+
+    <h2 text-justify>Detalhes de: {{event}}</h2>
     <br>
-  </ion-item>
-
-  <ion-item text-wrap>Descrição: {{description}}</ion-item>
-  <form [formGroup]="form">
-
-  <ion-item>
-    <ion-label stacked>Adicione sua opnião:</ion-label>
-    <ion-textarea type="text" formControlName="comentarios" name="comentarios" rows="2" maxLength="500" placeholder="Ótimo!"></ion-textarea>
-    <div class="hid">
-
-    <ion-textarea readonly type="text" formControlName="key" name="key" rows="2" maxLength="500" value="{{roomkey}}"></ion-textarea>
-</div>
-  </ion-item>
-  <ion-row>
-    <ion-col col-10> .</ion-col>
-    <ion-col col-2>
-      <button ion-button block type="submit" (click)="onSubmit()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-</form >
-<ion-item ><h2>Opniões:</h2></ion-item>
-<ion-item-sliding *ngFor="let item of filteredItems" text-wrap>
-    <ion-item text-wrap>
-      <h3><i>"{{item.comentarios}}"</i></h3>
+    <ion-item text-wrap>Endereço: {{endereco}}
+      <br> Tipo: {{toppings}}
+      <br> Classificação: {{etaria}}
+      <br> Início: {{month}}
+      <br> Hora início: {{timeStarts}}
+      <br> Término: {{dayEnds}}
+      <br> Hora término: {{timeEnds}}
+      <br>
     </ion-item>
-  </ion-item-sliding>
+
+    <ion-item text-wrap>Descrição: {{description}}</ion-item>
+    <form [formGroup]="form">
+
+      <ion-item>
+        <ion-label stacked>Adicione sua opnião:</ion-label>
+        <ion-textarea type="text" formControlName="comentarios" name="comentarios" rows="2" maxLength="500" placeholder="Ótimo!"></ion-textarea>
+      </ion-item>
+      <div class=hid>
+        <ion-textarea readonly type="text" formControlName="key" name="key" rows="2" maxLength="500" value="{{roomkey}}"></ion-textarea>
+
+        <ion-item-sliding *ngFor="let item of usuariofire |async" text-wrap>
+
+          <ion-item *ngIf="item.email==(use | async)?.email" class='cor' text-center text-wrap>
+            <ion-textarea readonly type="text" formControlName="user" name="user" rows="2" maxLength="500" value="{{(use | async)?.email}}"></ion-textarea>
+          </ion-item>
+          <ion-item *ngIf="item.email==(use | async)?.email" class='cor' text-center text-wrap>
+
+            <ion-textarea readonly type="text" formControlName="name" name="name" rows="2" maxLength="500" value="{{item.displayName}}"></ion-textarea>
+
+          </ion-item>
+        </ion-item-sliding>
+      </div>
+      <ion-row>
+        <ion-col col-10> .</ion-col>
+        <ion-col col-2>
+          <button ion-button block type="submit" (click)="onSubmit()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-item>
+      <h2>Opniões:</h2>
+    </ion-item>
+    <ion-item-sliding *ngFor="let item of filteredItems" text-wrap>
+      <ion-item text-wrap>
+        <h3>
+          <i>"{{item.comentarios}}" </i>
+        </h3>
+ -{{item.name}} 
+      </ion-item>      
+    </ion-item-sliding>
+  </div>
+
+  <ng-template #elseBlock>
+    .
+  </ng-template>
 </ion-content>

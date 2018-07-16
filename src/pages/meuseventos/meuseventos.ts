@@ -82,7 +82,7 @@ export class MeuseventosPage {
       this.remove(item)
         .then(() => {
           this.getFilteredItems();
-          this.toast.create({ message: 'Evento removido sucesso.', duration: 3000 }).present();
+          this.toast.create({ message: 'Evento removido com sucesso.', duration: 3000 }).present();
           
 
           console.log("remove");

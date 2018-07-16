@@ -64,9 +64,24 @@ export class CadastroPage {
       key: [this.people.$key],
       email: [this.people.email, Validators.required],
       password: [this.people.password, Validators.required],
+      password2: [this.people.password2, Validators.required],
+
       displayName: [this.people.displayName, Validators.required],
 
-    });
+    }, {validator: this.matchingPasswords('password', 'password2')});
+  }
+  matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+    // TODO maybe use this https://github.com/yuyang041060120/ng2-validation#notequalto-1
+    return (group: FormGroup): {[key: string]: any} => {
+      let password = group.controls[passwordKey];
+      let password2 = group.controls[confirmPasswordKey];
+
+      if (password.value !== password2.value) {
+        return {
+          mismatchedPasswords: true
+        };
+      }
+    }
   }
   onSubmit() {
     if (this.form.valid) {
@@ -102,12 +117,22 @@ export class CadastroPage {
       this.onSubmit();
     }
     } catch (e) {
-      let alert = this.alertCtrl.create({
-        title: 'Digite corretamente o e-mail.',
-        buttons: ['OK']
-      });
-      alert.present();      
-      console.log(e);
+      if (e.code=="auth/email-already-in-use"){
+        let alert = this.alertCtrl.create({
+          title: 'E-mail já cadastrado.',
+          buttons: ['OK']
+        });
+        alert.present(); 
+
+      }else{
+        let alert = this.alertCtrl.create({
+          title: 'Digite corretamente o e-mail.',
+          buttons: ['OK']
+        });
+        alert.present(); 
+      }
+     
+      console.log(e.code);
     }
   }
 

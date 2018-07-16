@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController/*, NavParams*/ } from 'ionic-angular';
+import { IonicPage, NavController,/*, NavParams*/ 
+AlertController} from 'ionic-angular';
 import { MapProxPage } from '../Map-prox/Map-prox';
 import { HomePage } from '../home/home';
 import { listaProxPage } from '../lista-prox/lista-prox';
@@ -26,6 +27,7 @@ export class FormSugerir {//para cadastrar
   tipo: string;
   uf: string;
   valor: string;
+  detalhes: string;
 
 }
 
@@ -41,7 +43,8 @@ export class SugerirPage {
   sugestoesform: FirebaseListObservable<any[]>;//para exibir e cadastrar
 
 
-  constructor(public db: AngularFireDatabase, public navCtrl: NavController, public afauth: AngularFireAuth) {
+  constructor(public db: AngularFireDatabase, public navCtrl: NavController, public afauth: AngularFireAuth,
+    private alertCtrl: AlertController,) {
     this.sugestoesform = this.db.list('/sugestoes');//para exibir e cadastrar
 
     this.sugerirform = new FormSugerir();//para cadastrar
@@ -62,10 +65,26 @@ export class SugerirPage {
 
 
   cadastrar() {//para cadastrar
+    if (this.sugerirform.pub==undefined || this.sugerirform.melhorhora==undefined ||
+      this.sugerirform.tipo==undefined ||  this.sugerirform.uf==undefined|| this.sugerirform.cidade==undefined || 
+      this.sugerirform.melhordia==undefined){
+      let alert = this.alertCtrl.create({
+        title: 'Preencha os campos obrigatórios!',
+        buttons: ['OK']
+      });
+      alert.present(); 
+    }else{
     this.sugestoesform.push(this.sugerirform).then(() => {
    // this.sugerirform = new FormSugerir();
+   let alert = this.alertCtrl.create({
+    title: 'Salvo!',
+    buttons: ['OK']
+  });
+  alert.present(); 
    console.log(this.sugerirform);
+   this.navCtrl.push(SugestoesPage);
     });
+  }
   }
 
   goToMapProxPage(params) {

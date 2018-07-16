@@ -39,6 +39,20 @@
       </div> -->
     </ion-item>
 
+    <ion-item  class="cor">
+      <ion-input type="password" [(ngModel)]="password2" formControlName="password2"  placeholder="Reescreva a senha" required show-password></ion-input>
+    </ion-item>
+    <ion-item class='form-text error' *ngIf="form.controls.password2.touched && form.hasError('mismatchedPasswords') && form.controls.password.valid" color="yel">
+      Senhas não coincidem.
+    </ion-item>
+
+
+    <!-- <ion-item class="cor" id="Home-input4">
+      <ion-input type="password" [(ngModel)]="password2" formControlName="password2"  placeholder="Reescreva a senha" required show-password></ion-input>
+    </ion-item>
+    <ion-item class='form-text error' *ngIf="(form.controls.password2.touched || form.controls.password2.dirty) && form.hasError('mismatchedPasswords') && form.controls.password.valid" color="yel" >
+      Senhas não coincidem.
+    </ion-item> -->
 
   </form>
 

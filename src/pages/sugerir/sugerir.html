@@ -21,20 +21,55 @@
 <ion-icon name="megaphone" color="primary" style="zoom:2.0;" ></ion-icon>         Nesta área você poderá sugerir um evento para organizadores.
       </p>
     </div>
-    <form id="sugest-form5">
+    <!-- <form id="sugest-form5">
       <ion-item id="input2">
         <ion-label></ion-label>
-        <ion-input type="text" [(ngModel)]="sugerirform.uf" name="uf" placeholder="UF*"></ion-input>
+        <ion-input type="text" [(ngModel)]="sugerirform.uf" name="uf" placeholder="UF *"></ion-input>
+      </ion-item> -->
+
+
+      <ion-item id="input2">
+        <ion-label>UF *</ion-label>
+        <ion-select [(ngModel)]="sugerirform.uf" name="uf" multiple="false">
+          <ion-option value="AC">Acre</ion-option>
+          <ion-option value="AL">Alagoas</ion-option>
+          <ion-option value="AP">Amapá</ion-option>
+          <ion-option value="AM">Amazonas</ion-option>
+          <ion-option value="BA">Bahia</ion-option>
+          <ion-option value="CE">Ceará</ion-option>
+          <ion-option value="DF">Distrito Federal</ion-option>
+          <ion-option value="ES">Espírito Santo</ion-option>
+          <ion-option value="GO">Goiás</ion-option>
+          <ion-option value="MA">Maranhão</ion-option>
+          <ion-option value="MT">Mato Grosso</ion-option>
+          <ion-option value="MS">Mato Grosso do Sul</ion-option>
+          <ion-option value="MG">Minas Gerais</ion-option>
+          <ion-option value="PA">Pará</ion-option>
+          <ion-option value="PB">Paraíba</ion-option>
+          <ion-option value="PR">Paraná</ion-option>
+          <ion-option value="PE">Pernambuco</ion-option>
+          <ion-option value="PI">Piauí</ion-option>
+          <ion-option value="RJ">Rio de Janeiro</ion-option>
+          <ion-option value="RN">Rio Grande do Norte</ion-option>
+          <ion-option value="RS">Rio Grande do Sul</ion-option>
+          <ion-option value="RO">Rondônia</ion-option>
+          <ion-option value="RR">Roraima</ion-option>
+          <ion-option value="SC">Santa Catarina</ion-option>
+          <ion-option value="SP">São Paulo</ion-option>
+          <ion-option value="SE">Sergipe</ion-option>
+          <ion-option value="TO">Tocantins</ion-option>
+        </ion-select>
       </ion-item>
+
+
       <ion-item id="input3">
         <ion-label></ion-label>
-        <ion-input type="text" [(ngModel)]="sugerirform.cidade" name="cidade" placeholder="Cidade*"></ion-input>
+        <ion-input type="text" [(ngModel)]="sugerirform.cidade" name="cidade" placeholder="Cidade *"></ion-input>
       </ion-item>
 
 
-    </form>
     <ion-item>
-      <ion-label>Tipo</ion-label>
+      <ion-label>Tipo *</ion-label>
       <ion-select [(ngModel)]="sugerirform.tipo" name="tipo" multiple="true">
         <ion-option>Evento cultural</ion-option>
         <ion-option>Praia</ion-option>
@@ -46,7 +81,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Melhor dia da semana</ion-label>
+      <ion-label>Melhor dia da semana *</ion-label>
       <ion-select [(ngModel)]="sugerirform.melhordia" name="melhordia" multiple="true">
         <ion-option>Seg. a sex.</ion-option>
         <ion-option>Sab</ion-option>
@@ -55,7 +90,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Melhor hora do dia</ion-label>
+      <ion-label>Melhor hora do dia *</ion-label>
       <ion-select [(ngModel)]="sugerirform.melhorhora" name="melhorhora" multiple="true">
         <ion-option>Manhã</ion-option>
         <ion-option>Tarde</ion-option>
@@ -65,7 +100,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Tipo de público</ion-label>
+      <ion-label>Tipo de público *</ion-label>
       <ion-select [(ngModel)]="sugerirform.pub" name="pub" multiple="true">
         <ion-option>Infantil</ion-option>
         <ion-option>Estudante</ion-option>
@@ -78,7 +113,6 @@
     <ion-item>
       <ion-label>Faixa de preço aceitável</ion-label>
       <ion-select [(ngModel)]="sugerirform.valor" name="valor" multiple="true">
-        <ion-option>N/A</ion-option>
         <ion-option>Até R$30</ion-option>
         <ion-option>Entre R$30 e R$100</ion-option>
         <ion-option>Mais de R$100</ion-option>
@@ -89,7 +123,7 @@
     </ion-item>
 
 
-
+<p>* Campos obrigatórios</p>
     <button id="sugest-button13" ion-button color="balanced" block on-click="cadastrar()">
       Salvar
     </button>

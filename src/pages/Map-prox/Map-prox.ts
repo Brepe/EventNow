@@ -62,7 +62,7 @@ export class MapProxPage {
     this.geolocation.getCurrentPosition()//aqui pra pegar loc atual
       .then((resp) => {
         let mypos = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-
+        console.log(resp);
         let mapOptions = {//opções da visualização do mapa
           zoom: 15,
           center: mypos,
@@ -104,19 +104,19 @@ export class MapProxPage {
         let image;
         
         if (top=="Festa"){
-          image = '/assets/img/party.png';
+          image = 'assets/img/party.png';
         } else if (top=="Feira"){
-          image = '/assets/img/feira.png';
+          image = 'assets/img/feira.png';
         } else if (top=="Praia"){
-          image = '/assets/img/beach.png';
+          image = 'assets/img/beach.png';
         } else if (top=="Show"){
-          image = '/assets/img/show.png';
+          image = 'assets/img/show.png';
         } else if (top=="Evento cultural"){
-          image = '/assets/img/cult.png';
+          image = 'assets/img/cult.png';
         } else if (top=="Outros"){
-          image = '/assets/img/other.png';
+          image = 'assets/img/other.png';
         } else{
-          image = '/assets/img/err.png';
+          image = 'assets/img/err.png';
         }
         
         let updatelocation = new google.maps.LatLng(lat, lng);

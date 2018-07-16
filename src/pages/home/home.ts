@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 
-import { MapProxPage } from '../Map-prox/Map-prox';
-import { Novoevento2Page } from '../novoevento2/novoevento2';
-import { listaProxPage } from '../lista-prox/lista-prox';
 import { CadastroPage } from '../cadastro/cadastro';
 import { Userclass } from '../../app/providers/user';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';  //<<<<por causa do erro do ngmodule nos cadastros
 import { CommonModule } from '@angular/common'; //<<<<por causa do erro do ngmodule nos cadastros
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
-import { SugerirPage } from '../sugerir/sugerir';
 import { Observable } from 'rxjs/Observable'; //para o auth firebase ngif
 import * as firebase from 'Firebase';
+import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database-deprecated';
 
 @Component({
   selector: 'page-home',
@@ -20,10 +17,14 @@ import * as firebase from 'Firebase';
 export class HomePage {
   usuario = {} as Userclass;
   use: Observable<firebase.User>; //para o auth firebase ngif
+  usuariofire: FirebaseListObservable<any[]>;//para exibir e cadastrar
+  usuariovar: string;
   private msgErro: any;
 
-  constructor(private alertCtrl: AlertController, public navCtrl: NavController, public afauth: AngularFireAuth, public loadingCtrl: LoadingController) {
+  constructor( private db: AngularFireDatabase, private alertCtrl: AlertController, public navCtrl: NavController, 
+    public afauth: AngularFireAuth, public loadingCtrl: LoadingController) {
     this.use = afauth.authState; //para o auth firebase ngif
+    this.usuariofire =  this.db.list('/usuario');//para exibir e cadastrar
 
   }
 
@@ -41,6 +42,7 @@ export class HomePage {
       firebase.auth().onAuthStateChanged(function (use) {
         if (use) {
           console.log(" User is signed in.");
+
         } else {
           console.log("No user is signed in.");
         }

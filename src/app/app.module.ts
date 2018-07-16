@@ -50,12 +50,12 @@ import { EditareventoPage } from '../pages/editarevento/editarevento';
 import { ProviderProvider } from '../pages/provider';
 
 var config = {
-  apiKey: "key",
-  authDomain: "geoloc----.firebaseapp.com",
-  databaseURL: "https://geoloc----.firebaseio.com",
-  projectId: "geoloc-----",
-  storageBucket: "geoloc----.appspot.com",
-  messagingSenderId: "ididid"
+  apiKey: "xxxx",
+  authDomain: "zzzz.firebaseapp.com",
+  databaseURL: "https://zzzz.firebaseio.com",
+  projectId: "zzzz",
+  storageBucket: "zzzz.appspot.com",
+  messagingSenderId: "241352714682"
 };
 
 
@@ -89,7 +89,7 @@ firebase.initializeApp(config);
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
-      apiKey: "key",
+      apiKey: "xxxx",
       libraries: ["places"]
     })
   ],

@@ -28,8 +28,13 @@ export class listaProxPage {
 
 
     }
-    show() {
-      this.showMe = true;
+    show(qual: boolean) {
+      if (qual==true){
+        this.showMe = true;
+      }else {
+        this.showMe = false;
+
+      }
     }
 
     ionViewWillLoad() {
@@ -58,10 +63,10 @@ export class listaProxPage {
       this.meventos.forEach(element => {
   
         for (let i in element) {
-          if (element[i].dayEnds >= strData) {
+          // if (element[i].dayEnds >= strData) {
             this.filteredItems.push(element[i]);
   
-          }              
+          // }              
   
         }
       });    
