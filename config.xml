@@ -2,7 +2,7 @@
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>EventNow</name>
     <description>Localize todos os eventos.</description>
-    <author email="bre.perdo@gmail.com" href="http://ionicframework.com/">Brenda Perdonati</author>
+    <author email="@gmail.com" href="http://ionicframework.com/">Brenda Perdonati</author>
     <content src="index.html" />
     <access origin="*" />
     <access origin="http://maps.google.com" />
